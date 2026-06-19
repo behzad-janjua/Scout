@@ -32,6 +32,25 @@ export default function CreateTestPage() {
     throw new Error("Timed out waiting for the Vapi transcript");
   }
 
+  // Demo-safe path: skip Vapi/Nebius entirely and load the prebuilt report.
+  async function loadDemoReport() {
+    setBusy(true);
+    setStatus(DASHBOARD_COPY.loadingStates.loadingReport);
+    try {
+      const res = await fetch("/api/calls/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fallback: true }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Could not load demo report");
+      router.push(`/reports/${data.report_id}`);
+    } catch (err) {
+      setStatus(`Error: ${(err as Error).message}`);
+      setBusy(false);
+    }
+  }
+
   async function runTest() {
     setBusy(true);
     setStatus(DASHBOARD_COPY.loadingStates.startingCall);
@@ -94,6 +113,13 @@ export default function CreateTestPage() {
               onClick={() => runTest()}
             >
               Start mystery call
+            </button>
+            <button
+              className="btn btn-ghost"
+              disabled={busy}
+              onClick={() => loadDemoReport()}
+            >
+              Load demo report
             </button>
           </div>
         </div>
