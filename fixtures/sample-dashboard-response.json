@@ -9,14 +9,14 @@
   "scenario": {
     "id": "scenario_demo_bike_001",
     "business_id": "biz_demo_bike_001",
-    "title": "E-bike repair inquiry",
-    "description": "Customer asks whether the shop can repair an e-bike with a clicking noise.",
-    "goal": "Determine whether the employee converts a high-intent repair caller into an appointment or clear intake step.",
-    "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
+    "title": "Angry recent-purchase complaint",
+    "description": "Customer bought a bike two weeks ago and is upset that the rear tire keeps going flat.",
+    "goal": "Determine whether the employee de-escalates an angry customer, takes ownership, captures details, and creates a clear inspection or warranty next step.",
+    "customer_persona": "Alex, a recent bike buyer who feels let down and needs the issue fixed before a weekend event.",
     "questions_to_ask": [
-      "Do you repair e-bikes?",
-      "Could I bring it in this week?",
-      "Do I need an appointment, or should I just stop by?"
+      "What are you going to do about the flat tire?",
+      "Am I going to have to pay for this?",
+      "Can someone actually look at it tomorrow?"
     ]
   },
   "call": {
@@ -30,48 +30,54 @@
     "ended_at": "2026-06-19T18:02:12.000Z",
     "duration_seconds": 132,
     "recording_url": "https://example.com/demo-recordings/bike-shop-call.mp3",
-    "transcript": "Scout.ai: Hi, I was wondering if you repair e-bikes.\nEmployee: Yeah, we probably do that.\nScout.ai: Great. I have one that's making a clicking noise. Could I bring it in this week?\nEmployee: You can just bring it in sometime.\nScout.ai: Okay, do I need an appointment or should I just stop by?\nEmployee: Not really, just stop by whenever.\nScout.ai: Got it. Are there certain hours that are better?\nEmployee: We're open normal hours. Someone can look at it if we're not too busy.\nScout.ai: Okay, thanks.\nEmployee: Okay, bye."
+    "transcript": "Scout.ai: Yeah, hi. I bought a bike from you two weeks ago, paid a lot for it, and the rear tire keeps going flat. I've only ridden it on the trail twice. Are you seriously selling broken bikes?\nEmployee: Uh, I mean flats happen. We can't really know what caused it.\nScout.ai: That's not really an answer. I barely used it and now I can't ride this weekend.\nEmployee: You can bring it in and we'll look at it.\nScout.ai: Am I going to have to pay for that?\nEmployee: Depends what it is. If it's not our fault, probably.\nScout.ai: Seriously? I bought it from you two weeks ago.\nEmployee: Like I said, just bring it in sometime.\nScout.ai: Can someone actually look at it tomorrow? I have an event this weekend.\nEmployee: Maybe, if we're not too busy.\nScout.ai: Should I leave my name and number?\nEmployee: No, just come by.\nScout.ai: Fine. Thanks.\nEmployee: Bye."
   },
   "report": {
     "report_id": "report_demo_bike_001",
     "call_id": "call_demo_bike_001",
-    "analysis_source": "fallback_fixture",
-    "overall_score": 58,
+    "analysis_source": "sample_fixture",
+    "overall_score": 44,
     "score_category": "lost_revenue_risk",
-    "outcome": "missed_opportunity",
+    "outcome": "poor_experience",
     "customer_intent": "high",
-    "summary": "The caller showed clear intent to bring in an e-bike for repair, but the employee gave vague answers, did not sound confident, did not collect contact information, and did not offer a specific repair intake time.",
+    "summary": "This was a simple angry-customer test: the caller had just bought a bike, felt let down, and wanted to know whether the shop would make it right. The employee never acknowledged the frustration, sounded defensive about whether the shop was responsible, gave only vague drop-off guidance, and declined the caller's offer to leave contact information. The call ended with no recovered trust, no scheduled inspection, and no owner of the next step.",
     "category_scores": {
-      "greeting_quality": 70,
-      "helpfulness": 55,
-      "confidence": 45,
+      "greeting_quality": 50,
+      "helpfulness": 34,
+      "confidence": 28,
       "lead_capture": 0,
-      "conversion_attempt": 15,
-      "clear_next_step": 25
+      "conversion_attempt": 8,
+      "clear_next_step": 12
     },
     "what_went_well": [
-      "The employee answered the caller's main question instead of turning them away.",
-      "The employee indicated that the shop may be able to inspect the bike.",
-      "The call stayed short and easy for the customer."
+      "The employee did allow the customer to bring the bike in for inspection.",
+      "The employee did not escalate the tone or argue directly with the customer.",
+      "The call exposed a concrete training opportunity: staff need a complaint-handling script for recent purchases."
     ],
     "worst_sentences": [
       {
-        "exact_sentence": "Yeah, we probably do that.",
-        "issue": "Uncertain answer",
-        "why_it_hurt_conversion": "The word \"probably\" makes the shop sound unsure and can reduce the customer's confidence before they visit.",
-        "better_response": "Yes, we service most e-bikes. What brand is it, and what issue are you noticing?"
+        "exact_sentence": "Uh, I mean flats happen. We can't really know what caused it.",
+        "issue": "Defensive first response",
+        "why_it_hurt_conversion": "The caller opened angry and worried they had been sold a bad bike. This response defended the shop before acknowledging the frustration, which made the customer feel dismissed.",
+        "better_response": "I'm sorry that happened, especially after you just bought it. Let's get it checked and see what is causing the flat."
       },
       {
-        "exact_sentence": "You can just bring it in sometime.",
-        "issue": "Vague next step",
-        "why_it_hurt_conversion": "The caller was ready to come in this week, but the employee did not offer a specific day, time, or intake process.",
-        "better_response": "We can take a look this week. We have openings this afternoon and tomorrow morning. Would either of those work?"
+        "exact_sentence": "Depends what it is. If it's not our fault, probably.",
+        "issue": "Cost uncertainty before reassurance",
+        "why_it_hurt_conversion": "The customer asked whether they would have to pay because they were already upset. Leading with possible blame made the shop sound unwilling to help.",
+        "better_response": "We'll inspect it first. Since you bought it two weeks ago, we'll check whether it is covered before we talk about any charge."
+      },
+      {
+        "exact_sentence": "No, just come by.",
+        "issue": "Declined lead capture",
+        "why_it_hurt_conversion": "The caller volunteered name and phone number. Declining it removed the shop's chance to follow up, reserve time, and recover the relationship.",
+        "better_response": "Yes, please. I'll take your name and number, note the tire issue, and make sure the team knows you bought it two weeks ago."
       }
     ],
     "missed_revenue_moments": [
-      "The caller asked whether they could bring the bike in this week, which showed high buying intent.",
-      "The caller asked whether an appointment was needed, giving the employee a natural opening to book a repair intake.",
-      "The employee ended the call without asking for the customer's name or phone number."
+      "The caller complained about a bike bought two weeks ago, which was a high-risk retention moment and a chance to protect future loyalty.",
+      "The caller said they had an event this weekend, creating urgency that should have been converted into a booked inspection.",
+      "The caller offered to leave a name and number, but the employee declined."
     ],
     "lead_capture_checklist": {
       "asked_name": false,
@@ -82,7 +88,7 @@
       "gave_clear_next_step": false,
       "asked_for_sale": false
     },
-    "recommended_staff_script": "Yes, we service most e-bikes. What brand do you have, and what issue are you hearing? We can take a look this week. I have openings this afternoon and tomorrow morning. Can I grab your name and phone number and reserve a repair intake?",
-    "top_training_priority": "Train staff to turn high-intent repair questions into a specific appointment or intake window before ending the call."
+    "recommended_staff_script": "I'm sorry the tire is still going flat. I would be frustrated too, especially after buying it two weeks ago. Let's inspect it first and see what's causing it and whether it is covered. I can reserve tomorrow at 10:30 or 3:00 so someone looks at it. Can I grab your name and phone number?",
+    "top_training_priority": "Train staff to handle angry recent-purchase complaints with four moves: acknowledge frustration, take ownership, offer a specific inspection time, and capture contact details before ending the call."
   }
 }

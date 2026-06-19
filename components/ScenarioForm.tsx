@@ -39,7 +39,7 @@ export default function ScenarioForm({
         <label>Scenario title</label>
         <input
           value={local.title}
-          placeholder="E-bike repair inquiry"
+          placeholder="Angry recent-purchase complaint"
           onChange={(e) => update({ title: e.target.value })}
         />
       </div>
@@ -47,7 +47,7 @@ export default function ScenarioForm({
         <label>Goal (what conversion are we testing?)</label>
         <input
           value={local.goal}
-          placeholder="Convert a high-intent repair caller into an appointment"
+          placeholder="See whether staff de-escalate and book a clear next step"
           onChange={(e) => update({ goal: e.target.value })}
         />
       </div>
@@ -55,7 +55,7 @@ export default function ScenarioForm({
         <label>Customer persona</label>
         <input
           value={local.customer_persona}
-          placeholder="Alex, a local e-bike owner hearing a clicking noise"
+          placeholder="Alex, a recent buyer upset about a flat tire"
           onChange={(e) => update({ customer_persona: e.target.value })}
         />
       </div>
@@ -64,7 +64,7 @@ export default function ScenarioForm({
         <textarea
           value={local.questions_to_ask}
           placeholder={
-            "Do you repair e-bikes?\nCould I bring it in this week?\nDo I need an appointment?"
+            "What are you going to do about the flat tire?\nAm I going to have to pay for this?\nCan someone look at it tomorrow?"
           }
           onChange={(e) => update({ questions_to_ask: e.target.value })}
         />

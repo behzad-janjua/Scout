@@ -17,14 +17,14 @@ Request:
     "owner_email": "owner@example.com"
   },
   "scenario": {
-    "title": "E-bike repair inquiry",
-    "description": "Customer asks whether the shop can repair an e-bike with a clicking noise.",
-    "goal": "Convert a high-intent repair caller into a repair intake.",
-    "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
+    "title": "Angry recent-purchase complaint",
+    "description": "Customer bought a bike two weeks ago and is upset that the rear tire keeps going flat.",
+    "goal": "See whether staff de-escalate the customer, take ownership, and create a clear inspection or warranty next step.",
+    "customer_persona": "Alex, a recent bike buyer who feels let down before a weekend event.",
     "questions_to_ask": [
-      "Do you repair e-bikes?",
-      "Could I bring it in this week?",
-      "Do I need an appointment, or should I just stop by?"
+      "What are you going to do about the flat tire?",
+      "Am I going to have to pay for this?",
+      "Can someone actually look at it tomorrow?"
     ]
   }
 }
@@ -78,7 +78,7 @@ Request:
   "ended_at": "2026-06-19T18:02:12.000Z",
   "duration_seconds": 132,
   "recording_url": "https://example.com/recording.mp3",
-  "transcript": "Scout.ai: Hi, I was wondering if you repair e-bikes..."
+  "transcript": "Scout.ai: I bought a bike from you two weeks ago and the rear tire keeps going flat..."
 }
 ```
 
@@ -131,15 +131,15 @@ Response:
   },
   "scenario": {
     "id": "uuid",
-    "title": "E-bike repair inquiry",
-    "goal": "Convert a high-intent repair caller into a repair intake."
+    "title": "Angry recent-purchase complaint",
+    "goal": "See whether staff de-escalate the customer and create a clear inspection or warranty next step."
   },
   "call": {
     "id": "uuid",
     "status": "completed",
     "duration_seconds": 132,
     "recording_url": "https://example.com/recording.mp3",
-    "transcript": "Scout.ai: Hi, I was wondering if you repair e-bikes..."
+    "transcript": "Scout.ai: I bought a bike from you two weeks ago and the rear tire keeps going flat..."
   },
   "report": {
     "id": "uuid",
@@ -153,8 +153,8 @@ Response:
     "worst_sentences": [],
     "missed_revenue_moments": [],
     "lead_capture_checklist": {},
-    "recommended_staff_script": "Yes, we service most e-bikes...",
-    "top_training_priority": "Train staff to turn high-intent repair questions into a specific appointment."
+    "recommended_staff_script": "I'm sorry the tire is still going flat...",
+    "top_training_priority": "Train staff to de-escalate complaints, offer a specific inspection time, and capture contact details."
   }
 }
 ```

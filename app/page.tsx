@@ -2,53 +2,54 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="stack">
-      <section>
-        <span className="tag">AI secret shopper for phone calls</span>
-        <h1 style={{ marginTop: 12 }}>
-          Find out whether your phone calls are making money — or losing
-          customers.
+    <div className="home-wrap">
+      <div className="hero-centered">
+        <h1 className="hero-title">
+          Is your staff{" "}
+          <span className="hero-accent">losing you sales</span>
+          {" "}on every phone call?
         </h1>
-        <p className="lede">
-          Scout.ai calls your business like a real customer, scores the
-          experience, and shows you exactly which sentences lost the sale.
+        <p className="hero-sub">
+          Scout calls your bike shop like a real customer with a real complaint,
+          scores the entire conversation, and shows you the exact sentences that
+          cost you trust and revenue.
         </p>
-        <div className="btn-row">
-          <Link className="btn" href="/create">
-            Run a mystery call test
+        <div className="hero-actions">
+          <Link className="btn btn-hero" href="/create">
+            Start a free test
           </Link>
           <Link className="btn btn-ghost" href="/reports">
-            View past reports
+            See a sample report
           </Link>
         </div>
-      </section>
+      </div>
 
-      <section className="grid grid-2">
-        <div className="card">
-          <div className="panel-label">How it works</div>
-          <ol className="clean">
-            <li>Create a business + a realistic test scenario.</li>
-            <li>Vapi places an AI mystery shopper call.</li>
-            <li>The transcript is captured and stored in Insforge.</li>
-            <li>Nebius analyzes the call and scores conversion.</li>
-            <li>You get a coaching report with better scripts.</li>
-          </ol>
+      <div className="feature-row">
+        <div className="feature-card">
+          <div className="feature-tag">Score</div>
+          <div className="feature-title">Know exactly how the call went</div>
+          <div className="feature-desc">
+            A 0&ndash;100 rating across greeting, helpfulness, lead capture, and
+            closing. No guessing, no gut feelings.
+          </div>
         </div>
-        <div className="card">
-          <div className="panel-label">Powered by</div>
-          <ul className="clean">
-            <li>
-              <strong>Vapi</strong> — realistic voice mystery-shopper calls
-            </li>
-            <li>
-              <strong>Nebius</strong> — transcript analysis &amp; coaching
-            </li>
-            <li>
-              <strong>Insforge</strong> — backend, storage &amp; dashboard data
-            </li>
-          </ul>
+        <div className="feature-card">
+          <div className="feature-tag">Transcript</div>
+          <div className="feature-title">Find the sentences that lost the sale</div>
+          <div className="feature-desc">
+            Every weak line pulled from the transcript, quoted exactly, with a
+            plain-English explanation of what went wrong.
+          </div>
         </div>
-      </section>
+        <div className="feature-card">
+          <div className="feature-tag">Script</div>
+          <div className="feature-title">Walk away with better words</div>
+          <div className="feature-desc">
+            Word-for-word replacements your staff can use on the very next call.
+            No training session required.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

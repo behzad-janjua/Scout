@@ -7,17 +7,17 @@ Use these examples when polishing the dashboard or rehearsing the demo.
 Before:
 
 ```text
-You can just bring it in sometime.
+Uh, I mean flats happen. We can't really know what caused it.
 ```
 
 Why it hurts:
 
-The caller was ready to visit this week, but the employee did not offer a specific intake time or capture contact information.
+The caller was angry about a bike bought two weeks ago. The employee defended the shop before acknowledging the frustration, which made the customer feel dismissed.
 
 After:
 
 ```text
-We can take a look this week. We have openings this afternoon and tomorrow morning. Would either of those work?
+I'm sorry that happened, especially after you just bought it. Let's get it checked and see what is causing the flat.
 ```
 
 ## Salon

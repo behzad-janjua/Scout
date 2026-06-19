@@ -16,9 +16,9 @@ export default function WorstSentencesPanel({
           {worstSentences.map((w, i) => (
             <div
               key={i}
+              className="sentence-finding"
               style={{
-                borderLeft: "3px solid var(--danger)",
-                paddingLeft: 12,
+                borderColor: "color-mix(in srgb, var(--danger) 40%, var(--border))",
               }}
             >
               <div style={{ fontStyle: "italic" }}>“{w.exact_sentence}”</div>

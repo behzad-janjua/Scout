@@ -6,13 +6,13 @@ Local businesses spend real money to make the phone ring, but many never know wh
 
 ## 3-Minute Demo Flow
 
-Open Scout.ai and create a mystery call test for Crank & Coast Bike Shop. The scenario is an e-bike repair inquiry, which is valuable because repair calls often turn into same-week revenue.
+Open Scout.ai and create a mystery call test for Crank & Coast Bike Shop. The scenario is a simple angry-customer complaint: the caller bought a bike two weeks ago, the rear tire keeps going flat, and they want to see whether the staff handles the frustration well.
 
-Scout.ai uses Vapi to place a realistic mystery shopper call. The caller asks whether the shop repairs e-bikes, explains that the bike is making a clicking noise, and asks whether they can bring it in this week.
+Scout.ai uses Vapi to place a realistic mystery shopper call. The caller starts irritated but not abusive, asks whether the shop will fix the issue, asks if they will have to pay, and asks whether someone can look at it before a weekend event.
 
-After the call, Scout.ai saves the transcript. The important moment is when the caller asks, "Could I bring it in this week?" That is buying intent. The employee answers, "You can just bring it in sometime." That sounds harmless, but it loses the sale because it does not book a time, capture a phone number, or give a clear next step.
+After the call, Scout.ai saves the transcript. The important moment is the first response: "Uh, I mean flats happen. We can't really know what caused it." That sounds small, but it misses the emotional job of the call. The customer needed to hear that the shop understood the frustration and would own the next step.
 
-Nebius analyzes the transcript and creates the report. The dashboard shows the score, the outcome, the worst sentences, and the missed revenue moments. It also explains why each sentence hurt conversion and gives a better response the employee could have used.
+Nebius analyzes the transcript and creates the report. The dashboard shows the score, the outcome, the worst sentences, and the missed revenue moments. It also explains why each sentence hurt trust and conversion, then gives a better response the employee could have used.
 
 The lead capture checklist shows the operational issue clearly: no name, no phone number, no booking, no clear next step, and no ask for the sale. The final staff script turns the call into coaching the owner can use immediately.
 

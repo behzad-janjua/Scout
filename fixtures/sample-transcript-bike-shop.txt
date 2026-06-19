@@ -1,10 +1,14 @@
-Scout.ai: Hi, I was wondering if you repair e-bikes.
-Employee: Yeah, we probably do that.
-Scout.ai: Great. I have one that's making a clicking noise. Could I bring it in this week?
-Employee: You can just bring it in sometime.
-Scout.ai: Okay, do I need an appointment or should I just stop by?
-Employee: Not really, just stop by whenever.
-Scout.ai: Got it. Are there certain hours that are better?
-Employee: We're open normal hours. Someone can look at it if we're not too busy.
-Scout.ai: Okay, thanks.
-Employee: Okay, bye.
+Scout.ai: Yeah, hi. I bought a bike from you two weeks ago, paid a lot for it, and the rear tire keeps going flat. I've only ridden it on the trail twice. Are you seriously selling broken bikes?
+Employee: Uh, I mean flats happen. We can't really know what caused it.
+Scout.ai: That's not really an answer. I barely used it and now I can't ride this weekend.
+Employee: You can bring it in and we'll look at it.
+Scout.ai: Am I going to have to pay for that?
+Employee: Depends what it is. If it's not our fault, probably.
+Scout.ai: Seriously? I bought it from you two weeks ago.
+Employee: Like I said, just bring it in sometime.
+Scout.ai: Can someone actually look at it tomorrow? I have an event this weekend.
+Employee: Maybe, if we're not too busy.
+Scout.ai: Should I leave my name and number?
+Employee: No, just come by.
+Scout.ai: Fine. Thanks.
+Employee: Bye.

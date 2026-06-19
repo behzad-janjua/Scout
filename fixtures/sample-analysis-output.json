@@ -1,54 +1,48 @@
 {
   "report_id": "report_demo_bike_001",
   "call_id": "call_demo_bike_001",
-  "overall_score": 58,
+  "overall_score": 44,
   "score_category": "lost_revenue_risk",
-  "outcome": "missed_opportunity",
+  "outcome": "poor_experience",
   "customer_intent": "high",
-  "summary": "The caller showed clear intent to bring in an e-bike for repair, but the employee gave vague answers, did not sound confident, did not collect contact information, and did not offer a specific repair intake time.",
+  "summary": "This was a simple angry-customer test: the caller had just bought a bike, felt let down, and wanted to know whether the shop would make it right. The employee never acknowledged the frustration, sounded defensive about whether the shop was responsible, gave only vague drop-off guidance, and declined the caller's offer to leave contact information. The call ended with no recovered trust, no scheduled inspection, and no owner of the next step.",
   "category_scores": {
-    "greeting_quality": 70,
-    "helpfulness": 55,
-    "confidence": 45,
+    "greeting_quality": 50,
+    "helpfulness": 34,
+    "confidence": 28,
     "lead_capture": 0,
-    "conversion_attempt": 15,
-    "clear_next_step": 25
+    "conversion_attempt": 8,
+    "clear_next_step": 12
   },
   "what_went_well": [
-    "The employee answered the caller's main question instead of turning them away.",
-    "The employee indicated that the shop may be able to inspect the bike.",
-    "The call stayed short and easy for the customer."
+    "The employee did allow the customer to bring the bike in for inspection.",
+    "The employee did not escalate the tone or argue directly with the customer.",
+    "The call exposed a concrete training opportunity: staff need a complaint-handling script for recent purchases."
   ],
   "worst_sentences": [
     {
-      "exact_sentence": "Yeah, we probably do that.",
-      "issue": "Uncertain answer",
-      "why_it_hurt_conversion": "The word \"probably\" makes the shop sound unsure and can reduce the customer's confidence before they visit.",
-      "better_response": "Yes, we service most e-bikes. What brand is it, and what issue are you noticing?"
+      "exact_sentence": "Uh, I mean flats happen. We can't really know what caused it.",
+      "issue": "Defensive first response",
+      "why_it_hurt_conversion": "The caller opened angry and worried they had been sold a bad bike. This response defended the shop before acknowledging the frustration, which made the customer feel dismissed.",
+      "better_response": "I'm sorry that happened, especially after you just bought it. Let's get it checked and see what is causing the flat."
     },
     {
-      "exact_sentence": "You can just bring it in sometime.",
-      "issue": "Vague next step",
-      "why_it_hurt_conversion": "The caller was ready to come in this week, but the employee did not offer a specific day, time, or intake process.",
-      "better_response": "We can take a look this week. We have openings this afternoon and tomorrow morning. Would either of those work?"
+      "exact_sentence": "Depends what it is. If it's not our fault, probably.",
+      "issue": "Cost uncertainty before reassurance",
+      "why_it_hurt_conversion": "The customer asked whether they would have to pay because they were already upset. Leading with possible blame made the shop sound unwilling to help.",
+      "better_response": "We'll inspect it first. Since you bought it two weeks ago, we'll check whether it is covered before we talk about any charge."
     },
     {
-      "exact_sentence": "Not really, just stop by whenever.",
-      "issue": "No booking attempt",
-      "why_it_hurt_conversion": "The employee missed a chance to convert a high-intent caller into a scheduled repair visit.",
-      "better_response": "Appointments help us make sure a technician is available. I can reserve a repair intake for you now."
-    },
-    {
-      "exact_sentence": "We're open normal hours. Someone can look at it if we're not too busy.",
-      "issue": "Weak availability guidance",
-      "why_it_hurt_conversion": "The answer puts uncertainty back on the customer and makes the visit feel risky.",
-      "better_response": "The best times are today before 4 or tomorrow between 10 and noon. Can I put your name on one of those windows?"
+      "exact_sentence": "Maybe, if we're not too busy.",
+      "issue": "No reliable next step",
+      "why_it_hurt_conversion": "The caller had an event this weekend and asked for tomorrow. A maybe answer made the visit feel uncertain and easy to abandon.",
+      "better_response": "Yes, bring it in tomorrow at 10:30 or 3:00 and we'll do the first inspection."
     }
   ],
   "missed_revenue_moments": [
-    "The caller asked whether they could bring the bike in this week, which showed high buying intent.",
-    "The caller asked whether an appointment was needed, giving the employee a natural opening to book a repair intake.",
-    "The employee ended the call without asking for the customer's name or phone number."
+    "The caller complained about a bike bought two weeks ago, which was a high-risk retention moment and a chance to protect future loyalty.",
+    "The caller said they had an event this weekend, creating urgency that should have been converted into a booked inspection.",
+    "The caller offered to leave a name and number, but the employee declined."
   ],
   "lead_capture_checklist": {
     "asked_name": false,
@@ -59,6 +53,6 @@
     "gave_clear_next_step": false,
     "asked_for_sale": false
   },
-  "recommended_staff_script": "Yes, we service most e-bikes. What brand do you have, and what issue are you hearing? We can take a look this week. I have openings this afternoon and tomorrow morning. Can I grab your name and phone number and reserve a repair intake?",
-  "top_training_priority": "Train staff to turn high-intent repair questions into a specific appointment or intake window before ending the call."
+  "recommended_staff_script": "I'm sorry the tire is still going flat. I would be frustrated too, especially after buying it two weeks ago. Let's inspect it first and see what's causing it and whether it is covered. I can reserve tomorrow at 10:30 or 3:00 so someone looks at it. Can I grab your name and phone number?",
+  "top_training_priority": "Train staff to handle angry recent-purchase complaints with four moves: acknowledge frustration, take ownership, offer a specific inspection time, and capture contact details before ending the call."
 }

@@ -2,7 +2,7 @@ import type { Business, Call, Report, Scenario } from "@/lib/types";
 import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 function fmtDuration(seconds?: number): string {
-  if (!seconds) return "—";
+  if (!seconds) return "N/A";
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m}m ${s}s`;
@@ -27,7 +27,7 @@ export default function CallSummaryCard({
           <div className="spread">
             <div>
               <h2 style={{ marginBottom: 2 }}>{business.name}</h2>
-              <div className="muted">{scenario?.title ?? "—"}</div>
+              <div className="muted">{scenario?.title ?? "Untitled"}</div>
             </div>
             <span className="tag">{call?.status ?? "no call"}</span>
           </div>
@@ -39,7 +39,7 @@ export default function CallSummaryCard({
               value={
                 call?.started_at
                   ? new Date(call.started_at).toLocaleString()
-                  : "—"
+                  : "Not recorded"
               }
             />
             {report?.outcome && (

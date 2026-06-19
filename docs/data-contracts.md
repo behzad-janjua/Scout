@@ -106,6 +106,6 @@ The Vapi webhook should produce this call shape:
 
 | ID | Business type | Scenario | Success signal |
 | --- | --- | --- | --- |
-| `bike_ebike_repair` | Bike shop | Customer asks about e-bike repair availability | Employee offers a repair intake slot and captures name or phone |
+| `bike_angry_warranty_complaint` | Bike shop | Customer complains about a recent bike purchase | Employee acknowledges frustration, offers an inspection time, and captures name or phone |
 | `salon_haircut_appointment` | Salon | Customer asks for a haircut before an event | Employee recommends a stylist/time and books the appointment |
 | `restaurant_birthday_reservation` | Restaurant | Customer asks for a Saturday birthday reservation | Employee checks availability, captures party size/name, and confirms reservation details |

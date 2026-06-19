@@ -6,6 +6,7 @@ Use this checklist when testing generated mystery shopper calls.
 
 - The caller asks one question at a time.
 - The caller sounds like a customer, not an auditor.
+- For complaint scenarios, the caller can sound frustrated but should not swear, threaten, or insult the employee.
 - The caller does not mention scores, lead capture, conversion, or training.
 - The caller gives the employee room to help.
 - The caller ends naturally after enough evidence is collected.
@@ -15,7 +16,7 @@ Use this checklist when testing generated mystery shopper calls.
 
 - The caller repeats the scenario too many times.
 - The caller asks multiple questions in one turn.
-- The caller sounds accusatory or salesy.
+- The caller becomes abusive, repetitive, or salesy.
 - The caller reveals that this is a test.
 - The caller keeps pushing after the employee gives a clear answer.
 - The caller invents details that are not in the scenario.
@@ -31,14 +32,14 @@ Fixture files:
 
 Notes:
 
-- The customer asks naturally about e-bike repair.
+- The customer is angry about a recent purchase in a simple, believable way.
 - The employee responses are plausibly weak without sounding cartoonishly bad.
-- The transcript contains clear conversion misses for booking, lead capture, and next step.
+- The transcript contains clear misses for empathy, ownership, booking, lead capture, and next step.
 
 Highlighted sentence:
 
 ```text
-You can just bring it in sometime.
+Uh, I mean flats happen. We can't really know what caused it.
 ```
 
 ## Salon Transcript QA

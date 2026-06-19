@@ -10,20 +10,20 @@
   "scenario": {
     "id": "scenario_demo_bike_001",
     "business_id": "biz_demo_bike_001",
-    "title": "E-bike repair inquiry",
-    "description": "Customer asks whether the shop can repair an e-bike with a clicking noise.",
-    "goal": "Determine whether the employee converts a high-intent repair caller into an appointment or clear intake step.",
-    "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
+    "title": "Angry recent-purchase complaint",
+    "description": "Customer bought a bike two weeks ago and is upset that the rear tire keeps going flat.",
+    "goal": "Determine whether the employee de-escalates an angry customer, takes ownership, captures details, and creates a clear inspection or warranty next step.",
+    "customer_persona": "Alex, a recent bike buyer who feels let down and needs the issue fixed before a weekend event.",
     "questions_to_ask": [
-      "Do you repair e-bikes?",
-      "Could I bring it in this week?",
-      "Do I need an appointment, or should I just stop by?"
+      "What are you going to do about the flat tire?",
+      "Am I going to have to pay for this?",
+      "Can someone actually look at it tomorrow?"
     ],
     "success_criteria": [
-      "Confirms the shop can inspect or repair the bike",
-      "Asks for bike brand or repair issue",
-      "Offers a specific intake window",
-      "Captures name or phone number"
+      "Acknowledges the customer's frustration",
+      "Explains inspection or warranty next steps without sounding defensive",
+      "Offers a specific time to bring the bike in",
+      "Captures name and phone number for follow-up"
     ]
   },
   "call": {
@@ -42,7 +42,7 @@
   "report": {
     "id": "report_demo_bike_001",
     "call_id": "call_demo_bike_001",
-    "analysis_source": "fallback_fixture",
+    "analysis_source": "sample_fixture",
     "analysis_path": "/fixtures/sample-analysis-output.json"
   }
 }

@@ -43,9 +43,11 @@ export default function TranscriptPanel({
                 style={
                   isFlagged
                     ? {
-                        background: "rgba(255,107,107,0.12)",
-                        borderLeft: "3px solid var(--danger)",
-                        paddingLeft: 8,
+                        background: "color-mix(in srgb, var(--danger) 10%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--danger) 30%, var(--border))",
+                        borderRadius: 6,
+                        padding: "4px 8px",
+                        margin: "2px 0",
                       }
                     : undefined
                 }

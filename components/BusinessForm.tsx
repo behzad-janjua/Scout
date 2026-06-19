@@ -11,7 +11,7 @@ export interface BusinessFormValue {
 
 const EMPTY: BusinessFormValue = {
   name: "",
-  business_type: "bike_shop",
+  business_type: "",
   phone_number: "",
   owner_email: "",
 };
@@ -49,6 +49,7 @@ export default function BusinessForm({
           value={local.business_type}
           onChange={(e) => update({ business_type: e.target.value })}
         >
+          <option value="" disabled>Select type</option>
           <option value="bike_shop">Bike shop</option>
           <option value="salon">Salon</option>
           <option value="restaurant">Restaurant</option>

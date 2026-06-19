@@ -10,7 +10,7 @@ export default function ScoreBadge({
   category?: ScoreCategory;
 }) {
   if (score == null || category == null) {
-    return <div className="score-badge">—</div>;
+    return <div className="score-badge" aria-label="No score available">?</div>;
   }
   return (
     <div className="row">

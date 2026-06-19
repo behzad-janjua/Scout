@@ -1,11 +1,11 @@
 [
   {
-    "scenario_id": "bike_ebike_repair",
+    "scenario_id": "bike_angry_warranty_complaint",
     "business_name": "Crank & Coast Bike Shop",
     "transcript_path": "/fixtures/sample-transcript-bike-shop.txt",
     "analysis_path": "/fixtures/sample-analysis-output.json",
     "dashboard_response_path": "/fixtures/sample-dashboard-response.json",
-    "highlight_sentence": "You can just bring it in sometime."
+    "highlight_sentence": "Uh, I mean flats happen. We can't really know what caused it."
   },
   {
     "scenario_id": "salon_haircut_appointment",
