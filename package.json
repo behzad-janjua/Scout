@@ -11,11 +11,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "env:check": "node scripts/check-env.mjs",
+    "setup:db": "node --env-file=.env scripts/setup-insforge.mjs",
+    "seed:db": "node --env-file=.env scripts/seed-insforge.mjs",
     "check": "npm run env:check && npm run typecheck && npm run build"
   },
   "dependencies": {
+    "@insforge/sdk": "^1.4.2",
     "next": "15.5.19",
     "react": "19.1.0",
     "react-dom": "19.1.0"
