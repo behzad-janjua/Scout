@@ -18,7 +18,7 @@ export default function HomePage() {
           <Link className="btn btn-hero" href="/create">
             Start a free test
           </Link>
-          <Link className="btn btn-ghost" href="/reports">
+          <Link className="btn btn-ghost" href="/reports/sample">
             See a sample report
           </Link>
         </div>

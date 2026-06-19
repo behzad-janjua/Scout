@@ -10,6 +10,7 @@ export default function NavBar() {
   return (
     <nav className="nav">
       <Link href="/">Home</Link>
+      <Link href="/reports">Reports</Link>
       {!onCreatePage && (
         <Link href="/create" className="nav-btn">
           Test a call

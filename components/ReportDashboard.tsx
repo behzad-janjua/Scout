@@ -26,8 +26,8 @@ export default function ReportDashboard({
     <div className="stack">
       <section className="spread">
         <div>
-          <Link href="/" className="muted">
-            ← Back
+          <Link href="/reports" className="muted">
+            ← All reports
           </Link>
           <div className="panel-label" style={{ marginTop: 10 }}>
             {eyebrow}

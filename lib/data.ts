@@ -221,6 +221,27 @@ export async function listReports(): Promise<Report[]> {
   );
 }
 
+// A lightweight row for the reports index: the report plus the business/call
+// it belongs to, so the list can show a name and date without a second fetch.
+export interface ReportListItem {
+  report: Report;
+  business: Business | null;
+  call: Call | null;
+}
+
+// List every report (newest first) joined with its business + call, for the
+// /reports index page.
+export async function listReportBundles(): Promise<ReportListItem[]> {
+  const reports = await listReports();
+  return Promise.all(
+    reports.map(async (report) => {
+      const call = await getCall(report.call_id);
+      const business = call ? await getBusiness(call.business_id) : null;
+      return { report, business, call };
+    })
+  );
+}
+
 // --- Bundle ----------------------------------------------------------------
 
 export async function getReportBundle(reportId: string): Promise<ReportBundle> {
