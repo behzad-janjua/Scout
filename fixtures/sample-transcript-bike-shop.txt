@@ -1,0 +1,10 @@
+Scout.ai: Hi, I was wondering if you repair e-bikes.
+Employee: Yeah, we probably do that.
+Scout.ai: Great. I have one that's making a clicking noise. Could I bring it in this week?
+Employee: You can just bring it in sometime.
+Scout.ai: Okay, do I need an appointment or should I just stop by?
+Employee: Not really, just stop by whenever.
+Scout.ai: Got it. Are there certain hours that are better?
+Employee: We're open normal hours. Someone can look at it if we're not too busy.
+Scout.ai: Okay, thanks.
+Employee: Okay, bye.

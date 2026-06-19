@@ -1,0 +1,59 @@
+[
+  {
+    "id": "bike_ebike_repair",
+    "business_type": "bike_shop",
+    "title": "E-bike repair inquiry",
+    "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
+    "goal_of_call": "Find out whether the shop repairs e-bikes and whether the employee converts the caller into a repair intake.",
+    "customer_intent": "high",
+    "questions_to_ask": [
+      "Hi, do you repair e-bikes?",
+      "Mine is making a clicking noise. Could I bring it in this week?",
+      "Do I need an appointment, or should I just stop by?"
+    ],
+    "success_criteria": [
+      "Confirms the shop can inspect or repair the bike",
+      "Asks for bike brand or repair issue",
+      "Offers a specific intake window",
+      "Captures name or phone number"
+    ]
+  },
+  {
+    "id": "salon_haircut_appointment",
+    "business_type": "salon",
+    "title": "Haircut appointment before an event",
+    "customer_persona": "Maya, a customer who needs a haircut before a weekend event.",
+    "goal_of_call": "Find out whether the salon offers availability and attempts to book the appointment.",
+    "customer_intent": "high",
+    "questions_to_ask": [
+      "Hi, do you have any haircut openings this week?",
+      "I have an event this weekend. Is there anyone you recommend?",
+      "Could I book something for Thursday or Friday?"
+    ],
+    "success_criteria": [
+      "Checks availability",
+      "Recommends a stylist or time",
+      "Offers to book the appointment",
+      "Captures name and phone number"
+    ]
+  },
+  {
+    "id": "restaurant_birthday_reservation",
+    "business_type": "restaurant",
+    "title": "Saturday birthday reservation",
+    "customer_persona": "Jordan, planning a birthday dinner for six people.",
+    "goal_of_call": "Find out whether the restaurant handles availability, captures party details, and confirms a reservation path.",
+    "customer_intent": "medium",
+    "questions_to_ask": [
+      "Hi, do you take reservations for Saturday night?",
+      "It would be for six people for a birthday dinner.",
+      "Do you have anything around 7?"
+    ],
+    "success_criteria": [
+      "Asks for party size and preferred time",
+      "Checks or explains availability",
+      "Captures name and phone number",
+      "Confirms reservation or waitlist next step"
+    ]
+  }
+]
