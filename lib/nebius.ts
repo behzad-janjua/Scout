@@ -129,15 +129,17 @@ export function validateAnalysis(raw: unknown): Analysis {
     throw new Error("summary is missing");
   }
 
-  const outcome = String(r.outcome);
-  if (!OUTCOMES.includes(outcome)) {
-    throw new Error(`outcome is invalid: ${outcome}`);
-  }
+  // Coerce the model-driven enums to safe defaults instead of hard-failing the
+  // whole report: a short or ambiguous call legitimately yields "unknown", and
+  // the live path has no fixture fallback, so a single off-vocabulary value must
+  // not block an otherwise-complete report.
+  const outcomeRaw = String(r.outcome).toLowerCase();
+  const outcome = OUTCOMES.includes(outcomeRaw) ? outcomeRaw : "missed_opportunity";
 
-  const intent = String(r.customer_intent);
-  if (!["low", "medium", "high"].includes(intent)) {
-    throw new Error(`customer_intent is invalid: ${intent}`);
-  }
+  const intentRaw = String(r.customer_intent).toLowerCase();
+  const intent = ["low", "medium", "high"].includes(intentRaw)
+    ? intentRaw
+    : "medium";
 
   const cs = r.category_scores as Record<string, unknown> | undefined;
   if (!cs || typeof cs !== "object") {

@@ -95,13 +95,33 @@ export default function CreateTestPage() {
 
   async function pollForTranscript(callId: string) {
     for (let attempt = 0; attempt < 60; attempt += 1) {
-      const res = await fetch(`/api/calls/${callId}`);
-      const call = await res.json();
-      if (!res.ok) throw new Error(call.error ?? "Could not load call status");
-      if (call.status === "failed") throw new Error(call.failure_reason ?? "The call failed");
-      if (call.transcript && call.transcript.trim().length > 0) return call;
-      setStatus(`${DASHBOARD_COPY.loadingStates.waitingForTranscript} Status: ${call.status}`);
-      await new Promise((r) => setTimeout(r, 5000));
+      // Tolerate a transient blip (e.g. a 500/HTML page during a dev recompile,
+      // or a network hiccup): keep polling instead of aborting the whole flow.
+      let call: {
+        status?: string;
+        transcript?: string;
+        failure_reason?: string;
+        error?: string;
+      } | null = null;
+      try {
+        const res = await fetch(`/api/calls/${callId}`);
+        if (res.ok) call = await res.json();
+      } catch {
+        call = null;
+      }
+
+      if (call) {
+        if (call.status === "failed") {
+          throw new Error(call.failure_reason ?? "The call failed");
+        }
+        if (call.transcript && call.transcript.trim().length > 0) {
+          return call;
+        }
+        setStatus(
+          `${DASHBOARD_COPY.loadingStates.waitingForTranscript} Current status: ${call.status}`
+        );
+      }
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     }
     throw new Error("Timed out waiting for the transcript");
   }

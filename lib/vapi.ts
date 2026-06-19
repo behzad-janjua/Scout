@@ -90,8 +90,12 @@ export function renderSystemPrompt(vars: CallVariables): string {
 // the Vapi dashboard. Kept minimal but realistic (sane voice/model defaults).
 function buildInlineAssistant(vars: CallVariables) {
   return {
-    name: `Scout.ai mystery shopper — ${vars.business_name}`,
-    firstMessageMode: "assistant-speaks-first",
+    // Vapi caps assistant.name at 40 chars, so keep the prefix short and slice.
+    name: `Scout.ai — ${vars.business_name}`.slice(0, 40),
+    // The shopper must open the call. "assistant-speaks-first" requires a static
+    // firstMessage (empty here -> dead air -> silence-timed-out), so we let the
+    // model generate the opener from the system prompt's "customer-style opening".
+    firstMessageMode: "assistant-speaks-first-with-model-generated-message",
     model: {
       provider: "openai",
       model: "gpt-4o-mini",
