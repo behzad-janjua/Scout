@@ -4,18 +4,26 @@
     "name": "Crank & Coast Bike Shop",
     "business_type": "bike_shop",
     "phone_number": "+15550101337",
+    "owner_email": "owner@example.com",
     "location": "Austin, TX"
   },
   "scenario": {
     "id": "scenario_demo_bike_001",
     "business_id": "biz_demo_bike_001",
     "title": "E-bike repair inquiry",
+    "description": "Customer asks whether the shop can repair an e-bike with a clicking noise.",
     "goal": "Determine whether the employee converts a high-intent repair caller into an appointment or clear intake step.",
     "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
     "questions_to_ask": [
       "Do you repair e-bikes?",
       "Could I bring it in this week?",
       "Do I need an appointment, or should I just stop by?"
+    ],
+    "success_criteria": [
+      "Confirms the shop can inspect or repair the bike",
+      "Asks for bike brand or repair issue",
+      "Offers a specific intake window",
+      "Captures name or phone number"
     ]
   },
   "call": {
@@ -34,6 +42,7 @@
   "report": {
     "id": "report_demo_bike_001",
     "call_id": "call_demo_bike_001",
+    "analysis_source": "fallback_fixture",
     "analysis_path": "/fixtures/sample-analysis-output.json"
   }
 }

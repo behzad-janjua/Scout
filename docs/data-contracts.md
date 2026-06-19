@@ -1,6 +1,32 @@
 # Scout.ai Data Contracts
 
-This file is the shared contract between Person A's app/backend work and Person B's prompts, fixtures, and demo content.
+This file is the shared contract for Scout.ai prompts, fixtures, backend routes, and dashboard data.
+
+## Core Workflow
+
+```text
+Store owner creates a test
+        ↓
+Insforge saves the business + test scenario
+        ↓
+Vapi places the mystery shopper call
+        ↓
+Vapi records/transcribes the call
+        ↓
+Insforge saves the transcript
+        ↓
+Nebius analyzes the transcript
+        ↓
+Insforge saves the score/report
+        ↓
+Store owner views the dashboard
+```
+
+Implementation details live in:
+
+- `/docs/insforge-workflow.md`
+- `/docs/insforge-schema.md`
+- `/docs/api-routes.md`
 
 ## Nebius Analysis Output
 
