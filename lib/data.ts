@@ -202,6 +202,25 @@ export async function getReport(id: string): Promise<Report | null> {
   return mem.reports.get(id) ?? null;
 }
 
+// List all reports, newest first. Used by the reports index page.
+export async function listReports(): Promise<Report[]> {
+  if (usingInsforge) {
+    const { data, error } = await client()
+      .database.from("reports")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(`[insforge:reports.list] ${error.message}`);
+    const rows = (data as unknown as Record<string, unknown>[]) ?? [];
+    return rows.map(
+      (row) =>
+        ({ ...(row as object), report_id: (row as { id: string }).id }) as Report
+    );
+  }
+  return [...mem.reports.values()].sort((a, b) =>
+    (b.created_at ?? "").localeCompare(a.created_at ?? "")
+  );
+}
+
 // --- Bundle ----------------------------------------------------------------
 
 export async function getReportBundle(reportId: string): Promise<ReportBundle> {

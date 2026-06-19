@@ -17,6 +17,9 @@ export default function HomePage() {
           <Link className="btn" href="/create">
             Run a mystery call test
           </Link>
+          <Link className="btn btn-ghost" href="/reports">
+            View past reports
+          </Link>
         </div>
       </section>
 
