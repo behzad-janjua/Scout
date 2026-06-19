@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReportBundle } from "@/lib/types";
 import { loadDemoBundle } from "@/lib/fixtures";
-import { getCall, getReport, getBusiness, getScenario } from "@/lib/store";
+import { getReportBundle } from "@/lib/data";
 import CallSummaryCard from "@/components/CallSummaryCard";
 import ScoreBadge from "@/components/ScoreBadge";
 import TranscriptPanel from "@/components/TranscriptPanel";
@@ -9,18 +9,15 @@ import WorstSentencesPanel from "@/components/WorstSentencesPanel";
 import ChecklistPanel from "@/components/ChecklistPanel";
 import RecommendedScript from "@/components/RecommendedScript";
 
-// Phase 1: resolve a report bundle from the in-memory store, falling back to the
-// demo fixture. Phase 2 swaps this for the GET /api/reports/:id Insforge read.
-function resolveBundle(id: string): ReportBundle {
+// Resolve a report bundle from the data layer (Insforge or in-memory), falling
+// back to the demo fixture so the dashboard always renders something useful.
+async function resolveBundle(id: string): Promise<ReportBundle> {
   const demo = loadDemoBundle();
   if (id === demo.report?.report_id) return demo;
 
-  const report = getReport(id);
-  if (!report) return demo; // graceful fallback so the dashboard always renders
-  const call = getCall(report.call_id);
-  const business = call ? getBusiness(call.business_id) : null;
-  const scenario = call ? getScenario(call.scenario_id) : null;
-  return { business, scenario, call, report };
+  const bundle = await getReportBundle(id);
+  if (!bundle.report) return demo; // graceful fallback for the demo
+  return bundle;
 }
 
 export default async function ReportPage({
@@ -29,7 +26,7 @@ export default async function ReportPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { business, scenario, call, report } = resolveBundle(id);
+  const { business, scenario, call, report } = await resolveBundle(id);
 
   return (
     <div className="stack">

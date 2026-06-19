@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCallByVapiId, createCall, id } from "@/lib/store";
+import { getCallByVapiId, createCall } from "@/lib/data";
 
 // POST /api/calls/webhook — inbound Vapi call events.
 // Phase 3 implements signature verification + status/transcript updates.
@@ -20,11 +20,10 @@ export async function POST(req: Request) {
     );
   }
 
-  const existing = getCallByVapiId(vapiCallId);
+  const existing = await getCallByVapiId(vapiCallId);
   if (!existing) {
     // Record a stub so we don't drop events that arrive before /start finishes.
-    createCall({
-      id: id("call"),
+    await createCall({
       business_id: "",
       scenario_id: "",
       provider: "vapi",
@@ -36,7 +35,6 @@ export async function POST(req: Request) {
       recording_url: null,
       transcript: "",
       failure_reason: null,
-      created_at: new Date().toISOString(),
     });
   }
 

@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
-import { createBusiness, createScenario, createCall, id } from "@/lib/store";
+import { createBusiness, createScenario, createCall } from "@/lib/data";
 import { loadDemoBundle } from "@/lib/fixtures";
-import type { Business, Call, Scenario } from "@/lib/types";
 
 // POST /api/calls/start
 // Body: { business, scenario, fallback }
 // - fallback: true  -> return the pre-built demo report id (demo-safe path)
-// - fallback: false -> create records + a pending call (Phase 3 wires Vapi)
+// - fallback: false -> create records + a queued call (Phase 3 wires Vapi)
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
 
@@ -29,17 +28,14 @@ export async function POST(req: Request) {
     );
   }
 
-  const business: Business = createBusiness({
-    id: id("biz"),
+  const business = await createBusiness({
     name: b.name,
     business_type: b.business_type ?? "other",
     phone_number: b.phone_number ?? "",
     owner_email: b.owner_email || undefined,
-    created_at: new Date().toISOString(),
   });
 
-  const scenario: Scenario = createScenario({
-    id: id("scenario"),
+  const scenario = await createScenario({
     business_id: business.id,
     title: s.title ?? "Untitled scenario",
     goal: s.goal ?? "",
@@ -50,13 +46,11 @@ export async function POST(req: Request) {
         : Array.isArray(s.questions_to_ask)
           ? s.questions_to_ask
           : [],
-    created_at: new Date().toISOString(),
   });
 
   // Phase 3 replaces this with a real Vapi outbound call. For now we record a
   // queued call so the rest of the pipeline has something to attach to.
-  const call: Call = createCall({
-    id: id("call"),
+  const call = await createCall({
     business_id: business.id,
     scenario_id: scenario.id,
     provider: "vapi",
@@ -68,7 +62,6 @@ export async function POST(req: Request) {
     recording_url: null,
     transcript: "",
     failure_reason: null,
-    created_at: new Date().toISOString(),
   });
 
   return NextResponse.json(

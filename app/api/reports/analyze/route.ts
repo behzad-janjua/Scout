@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCall, createReport } from "@/lib/store";
+import { getCall, createReport } from "@/lib/data";
 import { loadSampleAnalysis } from "@/lib/fixtures";
 
 // POST /api/reports/analyze
@@ -14,19 +14,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "call_id is required" }, { status: 400 });
   }
 
-  const call = getCall(callId);
+  const call = await getCall(callId);
   if (!call) {
     return NextResponse.json({ error: "call not found" }, { status: 404 });
   }
 
   // Placeholder analysis: clone the sample output, bound to this call.
+  // (report_id/call_id from the fixture are dropped; the store assigns its own.)
   const sample = loadSampleAnalysis();
-  const report = createReport({
-    ...sample,
-    report_id: `report_${callId}`,
-    call_id: callId,
-    created_at: new Date().toISOString(),
-  });
+  const { report_id: _r, call_id: _c, created_at: _ca, ...fields } = sample;
+  const report = await createReport({ ...fields, call_id: callId });
 
   return NextResponse.json(report, { status: 201 });
 }
