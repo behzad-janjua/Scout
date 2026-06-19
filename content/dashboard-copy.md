@@ -6,11 +6,35 @@ The app consumes the source-of-truth version of this copy from `/lib/dashboard-c
 
 - Report overview
 - Call transcript
+- Category scores
+- What went well
 - Worst sentences
 - Missed revenue moments
 - Lead capture checklist
 - Recommended staff script
 - Training priority
+
+## Category Labels
+
+- Greeting quality
+- Helpfulness
+- Confidence
+- Lead capture
+- Conversion attempt
+- Clear next step
+
+## Outcome Labels
+
+- Converted
+- Partially converted
+- Missed opportunity
+- Poor experience
+
+## Customer Intent Labels
+
+- Low intent
+- Medium intent
+- High intent
 
 ## Empty States
 

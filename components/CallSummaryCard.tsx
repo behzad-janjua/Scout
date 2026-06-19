@@ -1,4 +1,4 @@
-import type { Business, Call, Scenario } from "@/lib/types";
+import type { Business, Call, Report, Scenario } from "@/lib/types";
 import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 function fmtDuration(seconds?: number): string {
@@ -12,10 +12,12 @@ export default function CallSummaryCard({
   business,
   scenario,
   call,
+  report,
 }: {
   business?: Business | null;
   scenario?: Scenario | null;
   call?: Call | null;
+  report?: Report | null;
 }) {
   return (
     <div className="card">
@@ -40,7 +42,31 @@ export default function CallSummaryCard({
                   : "—"
               }
             />
+            {report?.outcome && (
+              <Stat
+                label="Outcome"
+                value={DASHBOARD_COPY.outcomeLabels[report.outcome]}
+              />
+            )}
+            {report?.customer_intent && (
+              <Stat
+                label="Customer"
+                value={DASHBOARD_COPY.intentLabels[report.customer_intent]}
+              />
+            )}
           </div>
+          <div className="panel-label" style={{ marginBottom: 0 }}>
+            Recording
+          </div>
+          {call?.recording_url ? (
+            <a className="muted" href={call.recording_url} target="_blank" rel="noreferrer">
+              ▶ Listen to the call recording
+            </a>
+          ) : (
+            <span className="muted" style={{ fontSize: "0.9rem" }}>
+              {DASHBOARD_COPY.emptyStates.recording}
+            </span>
+          )}
         </div>
       ) : (
         <p className="placeholder">{DASHBOARD_COPY.emptyStates.callSummary}</p>
