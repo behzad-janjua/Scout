@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BusinessForm, { BusinessFormValue } from "@/components/BusinessForm";
 import ScenarioForm, { ScenarioFormValue } from "@/components/ScenarioForm";
+import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 export default function CreateTestPage() {
   const router = useRouter();
@@ -15,7 +16,9 @@ export default function CreateTestPage() {
   async function runTest(fallback: boolean) {
     setBusy(true);
     setStatus(
-      fallback ? "Loading demo report…" : "Creating records and starting call…"
+      fallback
+        ? DASHBOARD_COPY.loadingStates.loadingReport
+        : DASHBOARD_COPY.loadingStates.startingCall
     );
     try {
       const res = await fetch("/api/calls/start", {

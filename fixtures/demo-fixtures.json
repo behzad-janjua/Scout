@@ -1,0 +1,24 @@
+[
+  {
+    "scenario_id": "bike_ebike_repair",
+    "business_name": "Crank & Coast Bike Shop",
+    "transcript_path": "/fixtures/sample-transcript-bike-shop.txt",
+    "analysis_path": "/fixtures/sample-analysis-output.json",
+    "dashboard_response_path": "/fixtures/sample-dashboard-response.json",
+    "highlight_sentence": "You can just bring it in sometime."
+  },
+  {
+    "scenario_id": "salon_haircut_appointment",
+    "business_name": "Brightside Salon",
+    "transcript_path": "/fixtures/sample-transcript-salon.txt",
+    "analysis_path": "/fixtures/sample-analysis-output-salon.json",
+    "highlight_sentence": "You can check online or call back later."
+  },
+  {
+    "scenario_id": "restaurant_birthday_reservation",
+    "business_name": "Juniper Table",
+    "transcript_path": "/fixtures/sample-transcript-restaurant.txt",
+    "analysis_path": "/fixtures/sample-analysis-output-restaurant.json",
+    "highlight_sentence": "No, just call back tomorrow."
+  }
+]

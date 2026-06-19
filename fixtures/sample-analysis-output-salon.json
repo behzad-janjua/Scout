@@ -1,0 +1,57 @@
+{
+  "report_id": "report_demo_salon_001",
+  "call_id": "call_demo_salon_001",
+  "overall_score": 54,
+  "score_category": "lost_revenue_risk",
+  "outcome": "missed_opportunity",
+  "customer_intent": "high",
+  "summary": "The caller was ready to book a haircut before a weekend event, but the employee did not check availability, recommend a stylist, capture contact information, or offer to book an appointment.",
+  "category_scores": {
+    "greeting_quality": 62,
+    "helpfulness": 48,
+    "confidence": 42,
+    "lead_capture": 0,
+    "conversion_attempt": 10,
+    "clear_next_step": 20
+  },
+  "what_went_well": [
+    "The employee acknowledged that openings might exist.",
+    "The employee did not turn the caller away immediately."
+  ],
+  "worst_sentences": [
+    {
+      "exact_sentence": "Maybe. It depends who you want to see.",
+      "issue": "Unclear availability",
+      "why_it_hurt_conversion": "The caller asked a simple booking question, but the employee made the next step feel uncertain.",
+      "better_response": "Yes, let me check. Are you hoping for Thursday or Friday, and do you have a preferred time?"
+    },
+    {
+      "exact_sentence": "Everyone here is pretty good.",
+      "issue": "Missed recommendation",
+      "why_it_hurt_conversion": "The caller asked for guidance before an event, but the employee did not help them choose a stylist or service.",
+      "better_response": "For an event, I would recommend Maya or Jules. They both have openings this week."
+    },
+    {
+      "exact_sentence": "You can check online or call back later.",
+      "issue": "No booking attempt",
+      "why_it_hurt_conversion": "The employee pushed a high-intent caller away instead of booking the appointment during the call.",
+      "better_response": "I can check for you now. I have Thursday at 3:30 or Friday at 11. Which works better?"
+    }
+  ],
+  "missed_revenue_moments": [
+    "The caller said they had an event this weekend, showing urgency and high booking intent.",
+    "The caller directly asked to book Thursday or Friday, but the employee did not offer an appointment time.",
+    "The call ended without collecting the caller's name or phone number."
+  ],
+  "lead_capture_checklist": {
+    "asked_name": false,
+    "asked_phone": false,
+    "identified_need": true,
+    "confirmed_availability": false,
+    "offered_booking": false,
+    "gave_clear_next_step": false,
+    "asked_for_sale": false
+  },
+  "recommended_staff_script": "Yes, I can help you find something before your event. Are you looking for Thursday or Friday? I have Thursday at 3:30 and Friday at 11. Can I grab your name and phone number to hold one of those?",
+  "top_training_priority": "Train staff to check availability and offer two specific appointment times before sending callers to another channel."
+}

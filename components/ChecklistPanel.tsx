@@ -1,14 +1,7 @@
 import type { LeadCaptureChecklist } from "@/lib/types";
+import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
-const LABELS: Record<keyof LeadCaptureChecklist, string> = {
-  asked_name: "Asked for name",
-  asked_phone: "Asked for phone number",
-  identified_need: "Identified the customer's need",
-  confirmed_availability: "Confirmed availability",
-  offered_booking: "Offered a booking",
-  gave_clear_next_step: "Gave a clear next step",
-  asked_for_sale: "Asked for the sale",
-};
+const LABELS = DASHBOARD_COPY.checklistLabels;
 
 export default function ChecklistPanel({
   checklist,
@@ -17,7 +10,9 @@ export default function ChecklistPanel({
 }) {
   return (
     <div className="card">
-      <div className="panel-label">Lead capture checklist</div>
+      <div className="panel-label">
+        {DASHBOARD_COPY.headings.leadCaptureChecklist}
+      </div>
       {checklist ? (
         <ul className="clean" style={{ listStyle: "none", paddingLeft: 0 }}>
           {(Object.keys(LABELS) as (keyof LeadCaptureChecklist)[]).map((k) => (
@@ -32,10 +27,7 @@ export default function ChecklistPanel({
           ))}
         </ul>
       ) : (
-        <p className="placeholder">
-          A checklist of the key lead-capture moments (name, phone, booking,
-          next step, asking for the sale) will appear here.
-        </p>
+        <p className="placeholder">{DASHBOARD_COPY.emptyStates.checklist}</p>
       )}
     </div>
   );

@@ -1,0 +1,10 @@
+Scout.ai: Hi, do you have any haircut openings this week?
+Employee: Maybe. It depends who you want to see.
+Scout.ai: I have an event this weekend. Is there anyone you recommend?
+Employee: Everyone here is pretty good.
+Scout.ai: Okay. Could I book something for Thursday or Friday?
+Employee: You can check online or call back later.
+Scout.ai: Do you know if there are any times open?
+Employee: I am not sure. The schedule changes a lot.
+Scout.ai: Okay, thanks.
+Employee: Bye.

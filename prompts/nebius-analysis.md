@@ -72,6 +72,8 @@ Why this is bad: `exact_sentence` is not an exact quote from the transcript, req
 
 ```json
 {
+  "report_id": "report_demo_bike_001",
+  "call_id": "call_demo_bike_001",
   "overall_score": 62,
   "score_category": "needs_improvement",
   "outcome": "missed_opportunity",

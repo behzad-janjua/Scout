@@ -1,0 +1,12 @@
+Scout.ai: Hi, do you take reservations for Saturday night?
+Employee: Yeah, we take reservations.
+Scout.ai: It would be for six people for a birthday dinner.
+Employee: Okay.
+Scout.ai: Do you have anything around 7?
+Employee: Saturday gets pretty busy, so you should probably call earlier.
+Scout.ai: Is there another time that might work?
+Employee: Maybe 5 or 9. I cannot promise anything.
+Scout.ai: Should I leave my name?
+Employee: No, just call back tomorrow.
+Scout.ai: Okay, thanks.
+Employee: Yep.

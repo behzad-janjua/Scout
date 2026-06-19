@@ -6,18 +6,17 @@ Local businesses spend real money to make the phone ring, but many never know wh
 
 ## 3-Minute Demo Flow
 
-1. Open Scout.ai and create a mystery call test for Crank & Coast Bike Shop.
-2. Choose the e-bike repair scenario.
-3. Explain that Vapi places the realistic mystery shopper call.
-4. Trigger the call or fallback demo.
-5. Show the transcript saved from the call.
-6. Point out the high-intent moment: the caller asks if they can bring the bike in this week.
-7. Run the Nebius analysis.
-8. Show the score and outcome: lost revenue risk / missed opportunity.
-9. Highlight the worst sentence: "You can just bring it in sometime."
-10. Show why it hurt conversion and the better staff response.
-11. Show the lead capture checklist, especially missing name, phone, booking, and next step.
-12. End on the recommended staff script.
+Open Scout.ai and create a mystery call test for Crank & Coast Bike Shop. The scenario is an e-bike repair inquiry, which is valuable because repair calls often turn into same-week revenue.
+
+Scout.ai uses Vapi to place a realistic mystery shopper call. The caller asks whether the shop repairs e-bikes, explains that the bike is making a clicking noise, and asks whether they can bring it in this week.
+
+After the call, Scout.ai saves the transcript. The important moment is when the caller asks, "Could I bring it in this week?" That is buying intent. The employee answers, "You can just bring it in sometime." That sounds harmless, but it loses the sale because it does not book a time, capture a phone number, or give a clear next step.
+
+Nebius analyzes the transcript and creates the report. The dashboard shows the score, the outcome, the worst sentences, and the missed revenue moments. It also explains why each sentence hurt conversion and gives a better response the employee could have used.
+
+The lead capture checklist shows the operational issue clearly: no name, no phone number, no booking, no clear next step, and no ask for the sale. The final staff script turns the call into coaching the owner can use immediately.
+
+If live calling or analysis is not available, use the fallback demo report. The product story stays the same: realistic call, saved transcript, AI analysis, and owner-friendly coaching.
 
 ## Sponsor Integration Explanation
 

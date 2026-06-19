@@ -1,4 +1,5 @@
 import type { WorstSentence } from "@/lib/types";
+import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 // Splits a raw transcript into speaker-labelled lines and highlights any line
 // that contains a flagged "worst sentence".
@@ -28,7 +29,9 @@ export default function TranscriptPanel({
 
   return (
     <div className="card">
-      <div className="panel-label">Transcript</div>
+      <div className="panel-label">
+        {DASHBOARD_COPY.headings.callTranscript}
+      </div>
       {transcript ? (
         <div>
           {parseLines(transcript).map((line, i) => {
@@ -56,10 +59,7 @@ export default function TranscriptPanel({
           })}
         </div>
       ) : (
-        <p className="placeholder">
-          The full call transcript with speaker labels will appear here.
-          Sentences that hurt conversion are highlighted in red.
-        </p>
+        <p className="placeholder">{DASHBOARD_COPY.emptyStates.transcript}</p>
       )}
     </div>
   );

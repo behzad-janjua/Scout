@@ -1,4 +1,5 @@
 import type { Business, Call, Scenario } from "@/lib/types";
+import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 function fmtDuration(seconds?: number): string {
   if (!seconds) return "—";
@@ -18,7 +19,7 @@ export default function CallSummaryCard({
 }) {
   return (
     <div className="card">
-      <div className="panel-label">Call summary</div>
+      <div className="panel-label">{DASHBOARD_COPY.headings.reportOverview}</div>
       {business ? (
         <div className="stack">
           <div className="spread">
@@ -42,10 +43,7 @@ export default function CallSummaryCard({
           </div>
         </div>
       ) : (
-        <p className="placeholder">
-          Call summary will appear here once a test has run (business, scenario,
-          date, duration, outcome, score).
-        </p>
+        <p className="placeholder">{DASHBOARD_COPY.emptyStates.callSummary}</p>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import type { WorstSentence } from "@/lib/types";
+import { DASHBOARD_COPY } from "@/lib/dashboard-copy";
 
 export default function WorstSentencesPanel({
   worstSentences = [],
@@ -7,7 +8,9 @@ export default function WorstSentencesPanel({
 }) {
   return (
     <div className="card">
-      <div className="panel-label">Worst sentences</div>
+      <div className="panel-label">
+        {DASHBOARD_COPY.headings.worstSentences}
+      </div>
       {worstSentences.length > 0 ? (
         <div className="stack">
           {worstSentences.map((w, i) => (
@@ -34,8 +37,7 @@ export default function WorstSentencesPanel({
         </div>
       ) : (
         <p className="placeholder">
-          The sentences that most hurt the sale — with the problem, why it hurt,
-          and a better response — will appear here.
+          {DASHBOARD_COPY.emptyStates.worstSentences}
         </p>
       )}
     </div>

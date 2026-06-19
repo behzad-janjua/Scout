@@ -1,0 +1,58 @@
+{
+  "report_id": "report_demo_restaurant_001",
+  "call_id": "call_demo_restaurant_001",
+  "overall_score": 61,
+  "score_category": "needs_improvement",
+  "outcome": "partially_converted",
+  "customer_intent": "medium",
+  "summary": "The employee confirmed that the restaurant takes reservations, but did not capture the party details, offer to check availability, or create a reliable reservation path.",
+  "category_scores": {
+    "greeting_quality": 68,
+    "helpfulness": 58,
+    "confidence": 44,
+    "lead_capture": 0,
+    "conversion_attempt": 35,
+    "clear_next_step": 42
+  },
+  "what_went_well": [
+    "The employee answered the main question directly.",
+    "The employee gave some indication that alternate times might exist.",
+    "The employee stayed brief and polite."
+  ],
+  "worst_sentences": [
+    {
+      "exact_sentence": "Saturday gets pretty busy, so you should probably call earlier.",
+      "issue": "Deflected reservation request",
+      "why_it_hurt_conversion": "The caller wanted to reserve a birthday dinner, but the employee shifted responsibility back to the customer.",
+      "better_response": "Saturday is busy, but let me check. For six people, I can look around 7 or offer nearby times."
+    },
+    {
+      "exact_sentence": "Maybe 5 or 9. I cannot promise anything.",
+      "issue": "Uncertain availability",
+      "why_it_hurt_conversion": "The employee mentioned possible times without confirming whether the customer could reserve one.",
+      "better_response": "I have 5:00 and 9:00 available for six. Would you like me to reserve one under your name?"
+    },
+    {
+      "exact_sentence": "No, just call back tomorrow.",
+      "issue": "No lead capture",
+      "why_it_hurt_conversion": "The customer offered to leave a name, but the employee declined and lost the chance to secure the reservation.",
+      "better_response": "Yes, I can take your name and phone number and hold the first available table that fits your party."
+    }
+  ],
+  "missed_revenue_moments": [
+    "The caller gave a party size and birthday occasion, which created a clear reservation opportunity.",
+    "The employee did not ask for the caller's name or phone number.",
+    "The employee told the customer to call back instead of creating a reservation or waitlist step."
+  ],
+  "lead_capture_checklist": {
+    "asked_name": false,
+    "asked_phone": false,
+    "identified_need": true,
+    "confirmed_availability": false,
+    "offered_booking": false,
+    "gave_clear_next_step": false,
+    "asked_for_sale": false
+  },
+  "recommended_staff_script": "Yes, we take reservations. For six people on Saturday, I can check 7 or nearby times. I have 5:00 and 9:00 available. Would you like me to reserve one for the birthday dinner? I can take your name and phone number now.",
+  "top_training_priority": "Train staff to convert reservation inquiries by checking availability, naming specific times, and capturing guest details."
+}

@@ -1,5 +1,7 @@
 # Scout.ai Dashboard Copy
 
+The app consumes the source-of-truth version of this copy from `/lib/dashboard-copy.ts`. Keep this file as the editor-friendly reference.
+
 ## Section Headings
 
 - Report overview

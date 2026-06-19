@@ -33,7 +33,7 @@
     "transcript": "Scout.ai: Hi, I was wondering if you repair e-bikes.\nEmployee: Yeah, we probably do that.\nScout.ai: Great. I have one that's making a clicking noise. Could I bring it in this week?\nEmployee: You can just bring it in sometime.\nScout.ai: Okay, do I need an appointment or should I just stop by?\nEmployee: Not really, just stop by whenever.\nScout.ai: Got it. Are there certain hours that are better?\nEmployee: We're open normal hours. Someone can look at it if we're not too busy.\nScout.ai: Okay, thanks.\nEmployee: Okay, bye."
   },
   "report": {
-    "id": "report_demo_bike_001",
+    "report_id": "report_demo_bike_001",
     "call_id": "call_demo_bike_001",
     "analysis_source": "fallback_fixture",
     "overall_score": 58,

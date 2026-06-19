@@ -24,6 +24,10 @@ Scout.ai combines voice interaction, transcript processing, structured data stor
 
 Vapi powers the live customer-style phone call. Nebius powers scenario generation and transcript reasoning. Insforge stores the workflow data so the owner can review calls, reports, scores, and recommendations over time.
 
+## 30-Second Sponsor Explanation
+
+Vapi is the voice layer: it places the mystery shopper call and captures the conversation. Nebius is the reasoning layer: it analyzes the transcript, scores the call, and writes the coaching recommendations. Insforge is the backend layer: it stores businesses, scenarios, call metadata, transcripts, and reports so the dashboard can show the full workflow.
+
 ## Likely Judge Questions
 
 ### What is the wedge?
