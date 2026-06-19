@@ -44,6 +44,9 @@ export interface CallVariables {
   customer_persona: string;
   goal_of_call: string;
   questions_to_ask: string;
+  // The customer's literal opening line. Used as the assistant's firstMessage so
+  // the model never improvises a business-style "thanks for calling" greeting.
+  opening_line: string;
   demo_customer_phone: string;
 }
 
@@ -54,9 +57,13 @@ export function buildCallVariables(
     "title" | "customer_persona" | "goal" | "questions_to_ask"
   >
 ): CallVariables {
-  const questions = (scenario.questions_to_ask ?? [])
-    .map((q, i) => `${i + 1}. ${q}`)
-    .join("\n");
+  const cleaned = (scenario.questions_to_ask ?? [])
+    .map((q) => q.trim())
+    .filter(Boolean);
+  const questions = cleaned.map((q, i) => `${i + 1}. ${q}`).join("\n");
+  // Open with the first scenario question (a customer line by construction);
+  // fall back to a generic customer opener if none was provided.
+  const firstQuestion = cleaned[0] ?? "I had a question about your service.";
   return {
     business_name: business.name,
     business_type: business.business_type || "local business",
@@ -64,6 +71,7 @@ export function buildCallVariables(
     customer_persona: scenario.customer_persona || "A realistic local customer",
     goal_of_call: scenario.goal,
     questions_to_ask: questions || "Ask about availability and next steps.",
+    opening_line: `Hi, ${firstQuestion}`,
     demo_customer_phone: DEMO_CUSTOMER_PHONE,
   };
 }
@@ -92,10 +100,12 @@ function buildInlineAssistant(vars: CallVariables) {
   return {
     // Vapi caps assistant.name at 40 chars, so keep the prefix short and slice.
     name: `Scout.ai — ${vars.business_name}`.slice(0, 40),
-    // The shopper must open the call. "assistant-speaks-first" requires a static
-    // firstMessage (empty here -> dead air -> silence-timed-out), so we let the
-    // model generate the opener from the system prompt's "customer-style opening".
-    firstMessageMode: "assistant-speaks-first-with-model-generated-message",
+    // The shopper opens with a fixed customer line (the scenario's first
+    // question). A static firstMessage both avoids the silence-timed-out failure
+    // and stops the model from improvising a business-style "thanks for calling"
+    // greeting — it anchors the assistant as the CALLER from word one.
+    firstMessageMode: "assistant-speaks-first",
+    firstMessage: vars.opening_line,
     model: {
       provider: "openai",
       model: "gpt-4o-mini",
