@@ -1,0 +1,88 @@
+{
+  "business": {
+    "id": "biz_demo_bike_001",
+    "name": "Crank & Coast Bike Shop",
+    "business_type": "bike_shop",
+    "phone_number": "+15550101337",
+    "owner_email": "owner@example.com"
+  },
+  "scenario": {
+    "id": "scenario_demo_bike_001",
+    "business_id": "biz_demo_bike_001",
+    "title": "E-bike repair inquiry",
+    "description": "Customer asks whether the shop can repair an e-bike with a clicking noise.",
+    "goal": "Determine whether the employee converts a high-intent repair caller into an appointment or clear intake step.",
+    "customer_persona": "Alex, a local e-bike owner hearing a clicking noise.",
+    "questions_to_ask": [
+      "Do you repair e-bikes?",
+      "Could I bring it in this week?",
+      "Do I need an appointment, or should I just stop by?"
+    ]
+  },
+  "call": {
+    "id": "call_demo_bike_001",
+    "business_id": "biz_demo_bike_001",
+    "scenario_id": "scenario_demo_bike_001",
+    "provider": "vapi",
+    "vapi_call_id": "vapi_demo_call_001",
+    "status": "completed",
+    "started_at": "2026-06-19T18:00:00.000Z",
+    "ended_at": "2026-06-19T18:02:12.000Z",
+    "duration_seconds": 132,
+    "recording_url": "https://example.com/demo-recordings/bike-shop-call.mp3",
+    "transcript": "Scout.ai: Hi, I was wondering if you repair e-bikes.\nEmployee: Yeah, we probably do that.\nScout.ai: Great. I have one that's making a clicking noise. Could I bring it in this week?\nEmployee: You can just bring it in sometime.\nScout.ai: Okay, do I need an appointment or should I just stop by?\nEmployee: Not really, just stop by whenever.\nScout.ai: Got it. Are there certain hours that are better?\nEmployee: We're open normal hours. Someone can look at it if we're not too busy.\nScout.ai: Okay, thanks.\nEmployee: Okay, bye."
+  },
+  "report": {
+    "id": "report_demo_bike_001",
+    "call_id": "call_demo_bike_001",
+    "analysis_source": "fallback_fixture",
+    "overall_score": 58,
+    "score_category": "lost_revenue_risk",
+    "outcome": "missed_opportunity",
+    "customer_intent": "high",
+    "summary": "The caller showed clear intent to bring in an e-bike for repair, but the employee gave vague answers, did not sound confident, did not collect contact information, and did not offer a specific repair intake time.",
+    "category_scores": {
+      "greeting_quality": 70,
+      "helpfulness": 55,
+      "confidence": 45,
+      "lead_capture": 0,
+      "conversion_attempt": 15,
+      "clear_next_step": 25
+    },
+    "what_went_well": [
+      "The employee answered the caller's main question instead of turning them away.",
+      "The employee indicated that the shop may be able to inspect the bike.",
+      "The call stayed short and easy for the customer."
+    ],
+    "worst_sentences": [
+      {
+        "exact_sentence": "Yeah, we probably do that.",
+        "issue": "Uncertain answer",
+        "why_it_hurt_conversion": "The word \"probably\" makes the shop sound unsure and can reduce the customer's confidence before they visit.",
+        "better_response": "Yes, we service most e-bikes. What brand is it, and what issue are you noticing?"
+      },
+      {
+        "exact_sentence": "You can just bring it in sometime.",
+        "issue": "Vague next step",
+        "why_it_hurt_conversion": "The caller was ready to come in this week, but the employee did not offer a specific day, time, or intake process.",
+        "better_response": "We can take a look this week. We have openings this afternoon and tomorrow morning. Would either of those work?"
+      }
+    ],
+    "missed_revenue_moments": [
+      "The caller asked whether they could bring the bike in this week, which showed high buying intent.",
+      "The caller asked whether an appointment was needed, giving the employee a natural opening to book a repair intake.",
+      "The employee ended the call without asking for the customer's name or phone number."
+    ],
+    "lead_capture_checklist": {
+      "asked_name": false,
+      "asked_phone": false,
+      "identified_need": true,
+      "confirmed_availability": false,
+      "offered_booking": false,
+      "gave_clear_next_step": false,
+      "asked_for_sale": false
+    },
+    "recommended_staff_script": "Yes, we service most e-bikes. What brand do you have, and what issue are you hearing? We can take a look this week. I have openings this afternoon and tomorrow morning. Can I grab your name and phone number and reserve a repair intake?",
+    "top_training_priority": "Train staff to turn high-intent repair questions into a specific appointment or intake window before ending the call."
+  }
+}
