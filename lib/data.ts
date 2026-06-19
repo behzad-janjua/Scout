@@ -143,6 +143,30 @@ export async function getCallByVapiId(vapiId: string): Promise<Call | null> {
   return null;
 }
 
+// Patch a call in place. Only the provided fields are changed; the updated row
+// is returned. Used by the Vapi webhook to fill in status/transcript/recording
+// as call events arrive.
+export async function updateCall(
+  id: string,
+  patch: Partial<Omit<Call, "id" | "created_at">>
+): Promise<Call | null> {
+  if (usingInsforge) {
+    const { data, error } = await client()
+      .database.from("calls")
+      .update(patch)
+      .eq("id", id)
+      .select();
+    if (error) throw new Error(`[insforge:calls.update] ${error.message}`);
+    const rows = (data as unknown as Call[]) ?? [];
+    return rows[0] ?? null;
+  }
+  const existing = mem.calls.get(id);
+  if (!existing) return null;
+  const updated: Call = { ...existing, ...patch };
+  mem.calls.set(id, updated);
+  return updated;
+}
+
 // --- Reports ---------------------------------------------------------------
 // Insforge uses the row's own `id` as the report id; we expose it as report_id.
 
