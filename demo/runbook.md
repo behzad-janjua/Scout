@@ -4,38 +4,29 @@
 
 Show that Scout.ai turns a phone call into a specific, owner-friendly coaching report.
 
-## Reliable Demo Path
+## Live Demo Path
 
 1. Open the app.
 2. Click `Run a mystery call test`.
 3. Use the bike shop scenario.
-4. Click `Load demo report` if live Vapi/Nebius/Insforge credentials are not ready.
-5. Start the explanation at the transcript.
-6. Highlight the worst sentence: "You can just bring it in sometime."
-7. Show the lead capture checklist.
-8. End on the recommended staff script.
+4. Enter the real phone number Vapi should call.
+5. Click `Start mystery call`.
+6. Answer the phone and let the AI shopper complete the call.
+7. Wait for Vapi to send the transcript through the webhook.
+8. Let Scout.ai run Nebius analysis and navigate to the report.
+9. Highlight the worst sentence, checklist, and recommended staff script.
 
-## Live Demo Path
+## Preflight
 
-Use this only when all sponsor credentials are working.
+- Insforge tables are created.
+- `.env.local` has live Insforge, Vapi, and Nebius credentials.
+- `VAPI_WEBHOOK_URL` points to a public URL for `/api/calls/webhook`.
+- The target phone can receive the call.
+- `npm run env:check` passes with `SCOUT_DEMO_MODE=false`.
 
-1. Create the business and scenario.
-2. Start the Vapi call.
-3. Confirm the Vapi webhook writes call status and transcript.
-4. Run Nebius analysis.
-5. Load the saved report from Insforge.
+## Backup Assets
 
-## Fallback Trigger
-
-Use fallback mode if any of these fail:
-
-- outbound call does not connect
-- webhook tunnel is down
-- transcript does not arrive
-- Nebius response is invalid JSON
-- Insforge read/write fails
-
-The fallback path should still tell the same product story. Do not frame it as fake data; frame it as the backup demo path using a representative completed call.
+The repo still includes sample transcripts and analysis fixtures for development and rehearsal. Do not use them for the main presentation unless the live sponsor services are unavailable.
 
 ## Presenter Checklist
 

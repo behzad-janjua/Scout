@@ -7,18 +7,18 @@ Scout.ai is an AI secret shopper for phone calls. It lets a store owner create a
 The app currently has:
 
 - Next.js app shell
-- create-test flow
-- fixture-backed demo report
+- live create-test flow
+- Vapi outbound call wiring and webhook capture
+- Insforge-backed async data layer with in-memory local fallback
+- Nebius transcript analysis route
 - report dashboard components
-- API route stubs for businesses, scenarios, calls, webhooks, and reports
 - prompts, fixtures, and backend contracts for Vapi, Nebius, and Insforge
 
 Still needed for live mode:
 
-- Insforge persistence
-- real Vapi outbound calls and webhook updates
-- real Nebius transcript analysis
-- production deployment/webhook URL
+- live credentials in `.env.local`
+- public Vapi webhook URL from deployment or a local tunnel
+- real end-to-end test call before presenting
 
 ## Setup
 
@@ -47,27 +47,23 @@ npm run env:check
 npm run typecheck
 npm run build
 npm run check
+npm run check:live
 ```
 
 ## Environment
 
-The app can run in demo mode without live credentials:
-
-```text
-SCOUT_DEMO_MODE=true
-```
-
-Live mode needs:
+The live demo needs:
 
 - `INSFORGE_API_URL`
 - `INSFORGE_API_KEY`
 - `VAPI_API_KEY`
-- `VAPI_ASSISTANT_ID`
 - `VAPI_PHONE_NUMBER_ID`
 - `VAPI_WEBHOOK_URL`
 - `NEBIUS_API_KEY`
 - `NEBIUS_BASE_URL`
 - `NEBIUS_MODEL`
+
+`VAPI_ASSISTANT_ID` is optional. If it is not set, Scout.ai creates an inline Vapi assistant from the prompt in `prompts/vapi-mystery-shopper.md`.
 
 See [docs/setup.md](docs/setup.md) for dependency and environment details.
 

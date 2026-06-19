@@ -1,20 +1,12 @@
 import { NextResponse } from "next/server";
-import {
-  getCall,
-  getBusiness,
-  getScenario,
-  createReport,
-} from "@/lib/data";
-import { loadSampleAnalysis } from "@/lib/fixtures";
-import { analyzeTranscript, nebiusConfigured } from "@/lib/nebius";
-import type { Analysis } from "@/lib/nebius";
+import { createReport, getBusiness, getCall, getScenario } from "@/lib/data";
+import { analyzeTranscript } from "@/lib/nebius";
 
 // POST /api/reports/analyze
 // Body: { call_id }
-// Sends the call's transcript (plus business type + scenario) to Nebius, parses
-// and validates the structured report, and stores it. If Nebius is unavailable
-// or returns bad output, falls back to the fixture analysis so the dashboard
-// always renders a complete report.
+// Sends the real Vapi transcript to Nebius, validates the structured report,
+// stores it, and returns the saved report. No fixture fallback is used on the
+// primary live-demo path.
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const callId: string | undefined = body?.call_id;
@@ -26,51 +18,46 @@ export async function POST(req: Request) {
   if (!call) {
     return NextResponse.json({ error: "call not found" }, { status: 404 });
   }
-
-  let analysis: Analysis | null = null;
-  let analysisSource: "nebius" | "fallback_fixture" = "fallback_fixture";
-  let fallbackReason: string | undefined;
-
-  if (nebiusConfigured() && call.transcript.trim()) {
-    try {
-      const business = call.business_id ? await getBusiness(call.business_id) : null;
-      const scenario = call.scenario_id ? await getScenario(call.scenario_id) : null;
-      analysis = await analyzeTranscript({
-        business: {
-          name: business?.name ?? "the business",
-          business_type: business?.business_type ?? "local business",
-        },
-        scenario: {
-          title: scenario?.title ?? "Mystery shopper call",
-          goal: scenario?.goal ?? "",
-        },
-        transcript: call.transcript,
-      });
-      analysisSource = "nebius";
-    } catch (err) {
-      fallbackReason = (err as Error).message;
-    }
-  } else if (!call.transcript.trim()) {
-    fallbackReason = "call has no transcript";
-  } else {
-    fallbackReason = "Nebius not configured";
+  if (!call.transcript.trim()) {
+    return NextResponse.json(
+      { error: "call transcript is not ready yet" },
+      { status: 409 }
+    );
   }
 
-  // Fallback: use the fixture analysis fields bound to this call.
-  if (!analysis) {
-    const sample = loadSampleAnalysis();
-    const { report_id: _r, call_id: _c, created_at: _ca, ...fields } = sample;
-    analysis = fields;
+  const [business, scenario] = await Promise.all([
+    getBusiness(call.business_id),
+    getScenario(call.scenario_id),
+  ]);
+  if (!business || !scenario) {
+    return NextResponse.json(
+      { error: "call is missing business or scenario context" },
+      { status: 409 }
+    );
   }
 
-  const report = await createReport({ ...analysis, call_id: callId });
+  try {
+    const analysis = await analyzeTranscript({
+      business: {
+        name: business.name,
+        business_type: business.business_type,
+      },
+      scenario: {
+        title: scenario.title,
+        goal: scenario.goal,
+      },
+      transcript: call.transcript,
+    });
+    const report = await createReport({ ...analysis, call_id: callId });
 
-  return NextResponse.json(
-    {
-      ...report,
-      analysis_source: analysisSource,
-      ...(fallbackReason ? { fallback_reason: fallbackReason } : {}),
-    },
-    { status: 201 }
-  );
+    return NextResponse.json(
+      { ...report, analysis_source: "nebius" },
+      { status: 201 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { error: (err as Error).message },
+      { status: 502 }
+    );
+  }
 }

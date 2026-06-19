@@ -5,33 +5,34 @@ import {
   createCall,
   updateCall,
 } from "@/lib/data";
-import { loadDemoBundle, loadSampleTranscript } from "@/lib/fixtures";
 import { buildCallVariables, startVapiCall, vapiConfigured } from "@/lib/vapi";
 
 // POST /api/calls/start
-// Body: { business, scenario, fallback }
-// - fallback: true  -> return the pre-built demo report id (demo-safe path)
-// - fallback: false -> create records, then place a live Vapi call. If the
-//   live call can't be placed (not configured / Vapi error), fall back to a
-//   simulated call seeded with the sample transcript so the pipeline still runs.
+// Body: { business, scenario }
+// Creates records, then places a live Vapi call.
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
-
-  // Demo-safe fallback: skip live calling entirely, return the prebuilt report.
-  if (body?.fallback) {
-    const demo = loadDemoBundle();
-    return NextResponse.json({
-      mode: "fallback",
-      call_id: demo.call?.id,
-      report_id: demo.report?.report_id,
-    });
-  }
 
   const b = body?.business ?? {};
   const s = body?.scenario ?? {};
   if (!b?.name) {
     return NextResponse.json(
       { error: "business.name is required to start a call" },
+      { status: 400 }
+    );
+  }
+  if (!vapiConfigured()) {
+    return NextResponse.json(
+      {
+        error:
+          "Vapi is not configured. Set VAPI_API_KEY and VAPI_PHONE_NUMBER_ID for a real call.",
+      },
+      { status: 400 }
+    );
+  }
+  if (!b?.phone_number) {
+    return NextResponse.json(
+      { error: "business.phone_number is required for a real call" },
       { status: 400 }
     );
   }
@@ -72,83 +73,32 @@ export async function POST(req: Request) {
     failure_reason: null,
   });
 
-  // Try to place a real outbound call. Anything that goes wrong here drops to
-  // the simulated-transcript fallback below — the demo must never hard-fail.
-  if (vapiConfigured() && business.phone_number) {
-    try {
-      const variables = buildCallVariables(business, scenario);
-      const result = await startVapiCall({
-        destinationNumber: business.phone_number,
-        variables,
-      });
-      const updated = await updateCall(call.id, {
-        vapi_call_id: result.vapiCallId,
-        status: result.status,
-      });
-      return NextResponse.json(
-        {
-          mode: "live",
-          business_id: business.id,
-          scenario_id: scenario.id,
-          call_id: call.id,
-          vapi_call_id: result.vapiCallId,
-          status: updated?.status ?? result.status,
-          note: "Live call placed. Transcript will arrive via webhook.",
-        },
-        { status: 201 }
-      );
-    } catch (err) {
-      // Fall through to the simulated path with the reason recorded.
-      return simulatedFallback(business.id, scenario.id, call.id, (err as Error).message);
-    }
-  }
-
-  // Vapi not configured (or no destination number): simulate the call.
-  return simulatedFallback(
-    business.id,
-    scenario.id,
-    call.id,
-    vapiConfigured()
-      ? "business has no phone_number for a live call"
-      : "Vapi not configured"
-  );
-}
-
-// Seed the call with the sample transcript and mark it simulated. This keeps
-// the downstream analyze/dashboard flow identical to a real completed call.
-async function simulatedFallback(
-  businessId: string,
-  scenarioId: string,
-  callId: string,
-  reason: string
-) {
-  let transcript = "";
+  const variables = buildCallVariables(business, scenario);
   try {
-    transcript = loadSampleTranscript();
-  } catch {
-    transcript = "";
+    const result = await startVapiCall({
+      destinationNumber: business.phone_number,
+      variables,
+    });
+    const updated = await updateCall(call.id, {
+      vapi_call_id: result.vapiCallId,
+      status: result.status,
+    });
+    return NextResponse.json(
+      {
+        mode: "live",
+        business_id: business.id,
+        scenario_id: scenario.id,
+        call_id: call.id,
+        vapi_call_id: result.vapiCallId,
+        status: updated?.status ?? result.status,
+        note: "Live call placed. Transcript will arrive via webhook.",
+      },
+      { status: 201 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { error: (err as Error).message, call_id: call.id },
+      { status: 502 }
+    );
   }
-  const startedAt = new Date().toISOString();
-  await updateCall(callId, {
-    provider: "fallback",
-    status: "fallback_simulated",
-    started_at: startedAt,
-    ended_at: startedAt,
-    duration_seconds: 132,
-    recording_url: null,
-    transcript,
-    failure_reason: reason,
-  });
-
-  return NextResponse.json(
-    {
-      mode: "fallback_simulated",
-      business_id: businessId,
-      scenario_id: scenarioId,
-      call_id: callId,
-      status: "fallback_simulated",
-      note: `Live call unavailable (${reason}). Loaded sample transcript so analysis can run.`,
-    },
-    { status: 201 }
-  );
 }

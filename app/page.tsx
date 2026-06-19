@@ -1,10 +1,6 @@
 import Link from "next/link";
-import { loadSampleRecords } from "@/lib/fixtures";
 
 export default function HomePage() {
-  // Surface the demo report so judges can jump straight into a finished example.
-  const sample = loadSampleRecords();
-
   return (
     <div className="stack">
       <section>
@@ -20,9 +16,6 @@ export default function HomePage() {
         <div className="btn-row">
           <Link className="btn" href="/create">
             Run a mystery call test
-          </Link>
-          <Link className="btn btn-ghost" href={`/reports/${sample.report.id}`}>
-            View sample report
           </Link>
         </div>
       </section>

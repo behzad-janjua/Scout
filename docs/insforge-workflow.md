@@ -89,9 +89,9 @@ Backend behavior:
 4. Update the `calls` row with `vapi_call_id` and status from Vapi.
 5. Return the local `call_id`.
 
-Fallback behavior:
+Live demo behavior:
 
-If Vapi is unavailable during the demo, create a `calls` row with status `fallback_simulated` and load `/fixtures/sample-transcript-bike-shop.txt`.
+If Vapi is unavailable during the demo, fail clearly before analysis. Do not substitute a transcript on the primary demo path.
 
 ## Step 4: Vapi Records And Transcribes The Call
 
@@ -152,9 +152,9 @@ Backend behavior:
 5. Write a `reports` row.
 6. Return the report.
 
-Fallback behavior:
+Live demo behavior:
 
-If Nebius is unavailable or returns invalid JSON, load `/fixtures/sample-analysis-output.json`, save it to `reports`, and mark the source as `fallback_fixture`.
+If Nebius is unavailable or returns invalid JSON, surface the error so the team can fix credentials, model configuration, or prompt output before presenting.
 
 ## Step 7: Insforge Saves The Score/Report
 

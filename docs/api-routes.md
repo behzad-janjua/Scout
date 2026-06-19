@@ -42,7 +42,7 @@ Response:
 
 ## `POST /api/calls/start`
 
-Starts a Vapi call or creates a fallback simulated call.
+Starts a real Vapi mystery shopper call.
 
 Request:
 
@@ -50,7 +50,7 @@ Request:
 {
   "business_id": "uuid",
   "scenario_id": "uuid",
-  "mode": "live | fallback"
+  "mode": "live"
 }
 ```
 
@@ -59,8 +59,8 @@ Response:
 ```json
 {
   "call_id": "uuid",
-  "vapi_call_id": "string or null",
-  "status": "queued | fallback_simulated"
+  "vapi_call_id": "string",
+  "status": "queued | ringing | in_progress"
 }
 ```
 
@@ -93,14 +93,13 @@ Response:
 
 ## `POST /api/reports/analyze`
 
-Runs Nebius analysis against a saved transcript or loads fallback analysis.
+Runs Nebius analysis against a saved transcript.
 
 Request:
 
 ```json
 {
-  "call_id": "uuid",
-  "mode": "live | fallback"
+  "call_id": "uuid"
 }
 ```
 
@@ -110,7 +109,6 @@ Response:
 {
   "report_id": "uuid",
   "call_id": "uuid",
-  "analysis_source": "nebius | fallback_fixture",
   "overall_score": 58,
   "score_category": "lost_revenue_risk",
   "outcome": "missed_opportunity"
@@ -161,8 +159,9 @@ Response:
 }
 ```
 
-## Demo Fallback Rules
+## Live Demo Rules
 
-- `mode: "fallback"` in `/api/calls/start` should load `/fixtures/sample-transcript-bike-shop.txt`.
-- `mode: "fallback"` in `/api/reports/analyze` should load `/fixtures/sample-analysis-output.json`.
-- The fallback flow should still write to Insforge so the dashboard path is identical to the live path.
+- `/api/calls/start` should fail clearly if Vapi credentials or a target phone number are missing.
+- Vapi webhook events should update the saved call with status, recording URL, and transcript.
+- `/api/reports/analyze` should return `409` until the call transcript is available.
+- `/api/reports/analyze` should fail clearly if Nebius credentials are missing or the model returns invalid JSON.

@@ -84,7 +84,7 @@ The Nebius analysis route should return a JSON object with these fields:
 
 ## Vapi Call Metadata
 
-The Vapi webhook or fallback call simulator should produce this call shape:
+The Vapi webhook should produce this call shape:
 
 ```json
 {
@@ -92,7 +92,7 @@ The Vapi webhook or fallback call simulator should produce this call shape:
   "vapi_call_id": "string",
   "business_id": "string",
   "scenario_id": "string",
-  "status": "queued | ringing | in_progress | completed | failed | fallback_simulated",
+  "status": "queued | ringing | in_progress | completed | failed",
   "started_at": "ISO-8601 timestamp",
   "ended_at": "ISO-8601 timestamp or null",
   "duration_seconds": 0,

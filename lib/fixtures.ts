@@ -1,5 +1,4 @@
-// Loads Person B's fixtures so the app (and the fallback demo path) always has
-// real-looking data even before live Vapi/Nebius calls work.
+// Loads Person B's reference fixtures for docs, rehearsal, and local checks.
 import fs from "fs";
 import path from "path";
 import type { Business, Call, Report, Scenario, ReportBundle } from "./types";
@@ -33,7 +32,7 @@ export function loadSampleRecords(): SampleRecords {
   return readJson<SampleRecords>("sample-records.json");
 }
 
-// Fully assembled demo bundle used by the fallback demo path.
+// Fully assembled reference bundle.
 export function loadDemoBundle(): ReportBundle {
   const records = loadSampleRecords();
   const transcript = loadSampleTranscript();

@@ -8,7 +8,6 @@
 //   4. Verify the webhook shared secret.
 //
 // Live calling only happens when VAPI_API_KEY + VAPI_PHONE_NUMBER_ID are set.
-// Everything degrades gracefully so the demo/fallback path keeps working.
 import fs from "fs";
 import path from "path";
 import type { Business, Scenario, CallStatus } from "./types";
@@ -77,7 +76,7 @@ function loadPromptTemplate(): string {
   return _promptCache;
 }
 
-// Fill {{var}} placeholders in the prompt with concrete values. Used when we
+// Fill {{var}} template values in the prompt with concrete values. Used when we
 // build a transient assistant inline (no pre-configured VAPI_ASSISTANT_ID).
 export function renderSystemPrompt(vars: CallVariables): string {
   let out = loadPromptTemplate();

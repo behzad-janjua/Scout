@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { ReportBundle } from "@/lib/types";
-import { loadDemoBundle } from "@/lib/fixtures";
 import { getReportBundle } from "@/lib/data";
 import CallSummaryCard from "@/components/CallSummaryCard";
 import ScoreBadge from "@/components/ScoreBadge";
@@ -11,14 +11,8 @@ import RevenueMoments from "@/components/RevenueMoments";
 import ChecklistPanel from "@/components/ChecklistPanel";
 import RecommendedScript from "@/components/RecommendedScript";
 
-// Resolve a report bundle from the data layer (Insforge or in-memory), falling
-// back to the demo fixture so the dashboard always renders something useful.
 async function resolveBundle(id: string): Promise<ReportBundle> {
-  const demo = loadDemoBundle();
-  if (id === demo.report?.report_id) return demo;
-
   const bundle = await getReportBundle(id);
-  if (!bundle.report) return demo; // graceful fallback for the demo
   return bundle;
 }
 
@@ -29,6 +23,7 @@ export default async function ReportPage({
 }) {
   const { id } = await params;
   const { business, scenario, call, report } = await resolveBundle(id);
+  if (!report) notFound();
 
   return (
     <div className="stack">

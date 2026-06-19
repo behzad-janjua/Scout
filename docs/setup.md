@@ -18,6 +18,7 @@ npm run typecheck
 npm run build
 npm run env:check
 npm run check
+npm run check:live
 ```
 
 Project dependency guardrails:
@@ -34,16 +35,16 @@ Create a local env file:
 cp .env.example .env.local
 ```
 
-The app can run in fixture-backed demo mode with:
+The real demo should run with:
 
 ```text
-SCOUT_DEMO_MODE=true
+SCOUT_DEMO_MODE=false
 ```
 
 Live mode needs credentials for all three sponsor integrations:
 
 - Insforge API URL and API key
-- Vapi API key, assistant ID, phone number ID, and webhook URL
+- Vapi API key, phone number ID, and webhook URL
 - Nebius API key, base URL, and model
 
 To check what is missing:
@@ -52,13 +53,17 @@ To check what is missing:
 npm run env:check
 ```
 
-## What Is Still Needed For Live Mode
+## Live Demo Checklist
 
-The repo has route stubs and contracts, but live integration still needs:
+Before presenting, confirm:
 
-- Insforge client setup in `lib/store.ts` or a new `lib/insforge.ts`
-- persistent create/read/update functions for businesses, scenarios, calls, and reports
-- Vapi outbound call creation in `app/api/calls/start/route.ts`
-- Vapi webhook verification and transcript/status updates in `app/api/calls/webhook/route.ts`
-- Nebius transcript analysis in `app/api/reports/analyze/route.ts`
-- production webhook URL configured in Vapi
+- `npm run env:check` passes with `SCOUT_DEMO_MODE=false`.
+- `npm run check:live` passes after credentials are set.
+- `npm run setup:db` creates the Insforge tables.
+- `npm run seed:db` can write a demo record set.
+- `VAPI_WEBHOOK_URL` is publicly reachable by Vapi.
+- A real outbound Vapi call reaches the target phone.
+- The webhook stores the transcript on the call record.
+- `/api/reports/analyze` creates a Nebius report from the real transcript.
+
+`VAPI_ASSISTANT_ID` is optional because the app can create an inline assistant from the prompt file.

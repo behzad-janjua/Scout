@@ -13,29 +13,50 @@ export default function CreateTestPage() {
   const [status, setStatus] = useState<string>("");
   const [busy, setBusy] = useState(false);
 
-  async function runTest(fallback: boolean) {
+  async function pollForTranscript(callId: string) {
+    for (let attempt = 0; attempt < 60; attempt += 1) {
+      const res = await fetch(`/api/calls/${callId}`);
+      const call = await res.json();
+      if (!res.ok) throw new Error(call.error ?? "Could not load call status");
+      if (call.status === "failed") {
+        throw new Error(call.failure_reason ?? "The call failed");
+      }
+      if (call.transcript && call.transcript.trim().length > 0) {
+        return call;
+      }
+      setStatus(
+        `${DASHBOARD_COPY.loadingStates.waitingForTranscript} Current status: ${call.status}`
+      );
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
+    throw new Error("Timed out waiting for the Vapi transcript");
+  }
+
+  async function runTest() {
     setBusy(true);
-    setStatus(
-      fallback
-        ? DASHBOARD_COPY.loadingStates.loadingReport
-        : DASHBOARD_COPY.loadingStates.startingCall
-    );
+    setStatus(DASHBOARD_COPY.loadingStates.startingCall);
     try {
       const res = await fetch("/api/calls/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ business, scenario, fallback }),
+        body: JSON.stringify({ business, scenario }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Request failed");
-      // Phase 1 stub returns a report_id (or demo id) to navigate to.
-      if (data.report_id) {
-        router.push(`/reports/${data.report_id}`);
-      } else {
-        setStatus(
-          `Stub OK — call ${data.call_id ?? "?"} created. Wire-up pending (Phase 3).`
-        );
+      setStatus("Live call placed. Waiting for Vapi to send the transcript...");
+      await pollForTranscript(data.call_id);
+
+      setStatus(DASHBOARD_COPY.loadingStates.analyzing);
+      const analysisRes = await fetch("/api/reports/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ call_id: data.call_id }),
+      });
+      const report = await analysisRes.json();
+      if (!analysisRes.ok) {
+        throw new Error(report.error ?? "Analysis failed");
       }
+      router.push(`/reports/${report.report_id}`);
     } catch (err) {
       setStatus(`Error: ${(err as Error).message}`);
     } finally {
@@ -63,23 +84,16 @@ export default function CreateTestPage() {
           <div>
             <strong>Ready to test</strong>
             <div className="muted" style={{ fontSize: "0.9rem" }}>
-              {status || "Start a live call, or load the demo report instantly."}
+              {status || "Start a real Vapi call, then analyze the transcript with Nebius."}
             </div>
           </div>
           <div className="btn-row" style={{ marginTop: 0 }}>
             <button
               className="btn"
               disabled={busy}
-              onClick={() => runTest(false)}
+              onClick={() => runTest()}
             >
               Start mystery call
-            </button>
-            <button
-              className="btn btn-ghost"
-              disabled={busy}
-              onClick={() => runTest(true)}
-            >
-              Load demo report
             </button>
           </div>
         </div>

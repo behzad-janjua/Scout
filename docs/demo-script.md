@@ -16,7 +16,7 @@ Nebius analyzes the transcript and creates the report. The dashboard shows the s
 
 The lead capture checklist shows the operational issue clearly: no name, no phone number, no booking, no clear next step, and no ask for the sale. The final staff script turns the call into coaching the owner can use immediately.
 
-If live calling or analysis is not available, use the fallback demo report. The product story stays the same: realistic call, saved transcript, AI analysis, and owner-friendly coaching.
+For the live demo, wait for the real Vapi transcript and let Scout.ai run Nebius analysis before opening the report.
 
 ## Sponsor Integration Explanation
 

@@ -16,7 +16,8 @@
     "env:check": "node scripts/check-env.mjs",
     "setup:db": "node --env-file=.env scripts/setup-insforge.mjs",
     "seed:db": "node --env-file=.env scripts/seed-insforge.mjs",
-    "check": "npm run env:check && npm run typecheck && npm run build"
+    "check": "npm run typecheck && npm run build",
+    "check:live": "npm run env:check && npm run check"
   },
   "dependencies": {
     "@insforge/sdk": "^1.4.2",

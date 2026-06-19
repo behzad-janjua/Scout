@@ -36,9 +36,9 @@ This schema is platform-neutral so it can be implemented through Insforge tables
 | `id` | uuid | yes | Primary key |
 | `business_id` | uuid | yes | Foreign key to `businesses.id` |
 | `scenario_id` | uuid | yes | Foreign key to `scenarios.id` |
-| `provider` | text | yes | `vapi` or `fallback` |
+| `provider` | text | yes | `vapi` |
 | `vapi_call_id` | text | no | External Vapi call ID |
-| `status` | text | yes | `queued`, `ringing`, `in_progress`, `completed`, `failed`, `fallback_simulated` |
+| `status` | text | yes | `queued`, `ringing`, `in_progress`, `completed`, `failed` |
 | `started_at` | timestamp | no | From Vapi or app |
 | `ended_at` | timestamp | no | From Vapi or app |
 | `duration_seconds` | integer | no | Call duration |
@@ -54,7 +54,7 @@ This schema is platform-neutral so it can be implemented through Insforge tables
 | --- | --- | --- | --- |
 | `id` | uuid | yes | Primary key |
 | `call_id` | uuid | yes | Foreign key to `calls.id` |
-| `analysis_source` | text | yes | `nebius` or `fallback_fixture` |
+| `analysis_source` | text | yes | `nebius` |
 | `overall_score` | integer | yes | 0-100 |
 | `score_category` | text | yes | `excellent`, `good`, `needs_improvement`, `lost_revenue_risk` |
 | `outcome` | text | yes | `converted`, `partially_converted`, `missed_opportunity`, `poor_experience` |

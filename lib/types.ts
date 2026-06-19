@@ -20,8 +20,7 @@ export type CallStatus =
   | "ringing"
   | "in_progress"
   | "completed"
-  | "failed"
-  | "fallback_simulated";
+  | "failed";
 
 // --- Database records (see IDEA.md "Suggested Data Model") ---
 
